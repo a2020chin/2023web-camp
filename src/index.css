@@ -6,5 +6,5 @@ body{
   @apply bg-[#1E1E1E] text-white font-TC
 }
 h2{
-  @apply text-5xl font-black leading-[1.2] mr-24 md:text-[120px]
+  @apply text-5xl font-black leading-[1.2] md:text-[120px]
 }

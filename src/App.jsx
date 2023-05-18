@@ -1,7 +1,8 @@
 
 import { Routes, Route } from "react-router-dom";
 
-import HOME from './pages/Home';
+import Hearder from './component/Header'
+import Home from './pages/Home';
 // import Pricing from './Pricing';
 
 function App() {
@@ -9,8 +10,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<HOME />} />
-      {/* <Route path="/pricing" element={<Pricing />} /> */}
+      <Route path="/" element={<Hearder />} >
+        <Route index element={<Home />} />
+        {/* <Route path="/pricing" element={<Pricing />} /> */}
+      </Route>
     </Routes>
   )
 }
