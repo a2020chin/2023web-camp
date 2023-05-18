@@ -3,8 +3,34 @@
 @tailwind utilities;
 
 body{
-  @apply bg-[#1E1E1E] text-white font-TC
+  @apply bg-black-1000 text-white font-TC
 }
-h2{
-  @apply text-5xl font-black leading-[1.2] md:text-[120px]
+
+.display01{
+  @apply text-[160px] leading-[1.2]
+}
+.display02{
+  @apply text-[120px] leading-[1.2] md:text-[120px]
+}
+.display03{
+  @apply text-[80px] leading-[1.2]
+}
+
+.heading01{
+  @apply text-[48px] leading-[1.2]
+}
+.heading02{
+  @apply text-[40px] leading-[1.2]
+}
+.heading03{
+  @apply text-[32px] leading-[1.2]
+}
+.heading04{
+  @apply text-[28px] leading-[1.2]
+}
+.heading05{
+  @apply text-[24px] leading-[1.2]
+}
+.heading06{
+  @apply text-[20px] leading-[1.2]
 }

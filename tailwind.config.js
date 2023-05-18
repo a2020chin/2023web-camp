@@ -18,6 +18,23 @@ export default {
         'xl': '1328px',
       },
     },
+    extend: {
+      colors: {
+        black: {
+          0: '#FFFFFF',
+          200: '#F2F2F2',
+          400: '#D1D1D1',
+          600: '#919191',
+          800: '#525252',
+          1000: '#020202'
+        },
+        primary: '#F18724',
+        surface: '#F2EFE7'
+      }
+    },
+    backgroundImage: {
+      'black-gradient': "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 8%, rgba(0,0,0,0) 93%, rgba(0,0,0,1) 100%)"
+    }
   },
   plugins: [],
 }
