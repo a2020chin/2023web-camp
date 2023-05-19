@@ -1,7 +1,22 @@
-import FlashImg from "@/assets/icons/flashon.png";
+import Button from "@/component/Button";
+import MotionIcon from "@/component/MotionIcon";
+import ProductSection from "@/component/ProductSection";
 
-import Button from "../component/Button";
-import MotionIcon from "../component/MotionIcon";
+import enterprise1 from "@/assets/enterprise1.png";
+import enterprise2 from "@/assets/enterprise2.png";
+import enterprise3 from "@/assets/enterprise3.png";
+import enterprise4 from "@/assets/enterprise4.png";
+import enterprise5 from "@/assets/enterprise5.png";
+import enterprise6 from "@/assets/enterprise6.png";
+import enterprise7 from "@/assets/enterprise7.png";
+import enterprise8 from "@/assets/enterprise8.png";
+import enterprise9 from "@/assets/enterprise9.png";
+import enterprise11 from "@/assets/enterprise11.png";
+import enterprise12 from "@/assets/enterprise12.png";
+
+import avatar1 from "@/assets/avatar1.png";
+import avatar2 from "@/assets/avatar2.png";
+import avatar3 from "@/assets/avatar3.png";
 
 // const AdvantageCard = ({ children }) => {
 //   return (
@@ -80,14 +95,164 @@ const Home = () => {
         </div>
 
         <h3 className="heading03 font-black mb-20">來自合作夥伴</h3>
-        <div className="relative">
-          <div className="absolute w-full h-full bg-black-gradient"></div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          ipsa molestias unde nisi iste facilis, iusto distinctio ab aspernatur
-          nam voluptatibus nulla, minima nihil consequuntur obcaecati ipsum
-          quisquam, aliquid sapiente.
+        <div className="relative mb-40">
+          <div className="absolute w-full h-full bg-black-gradient z-50"></div>
+          <div className="flex gap-5 overflow-hidden mb-5">
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise1}
+              alt="enterprise1"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise2}
+              alt="enterprise2"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise3}
+              alt="enterprise3"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise4}
+              alt="enterprise4"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise5}
+              alt="enterprise5"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise6}
+              alt="enterprise6"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise1}
+              alt="enterprise7"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise2}
+              alt="enterprise8"
+            />
+            {/* <img className="w-40 h-10 object-cover" src={enterprise9} alt="enterprise9" /> */}
+          </div>
+          <div className="flex gap-5 overflow-hidden">
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise6}
+              alt="enterprise3"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise7}
+              alt="enterprise4"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise8}
+              alt="enterprise5"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise9}
+              alt="enterprise6"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise11}
+              alt="enterprise7"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise12}
+              alt="enterprise8"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise6}
+              alt="enterprise1"
+            />
+            <img
+              className="w-40 h-10 object-cover"
+              src={enterprise7}
+              alt="enterprise2"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-6 mb-40">
+          <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
+            <div className="flex gap-[5px]">
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+            </div>
+            <p className="flex-1 text-black-400 pb-10">
+              非常喜歡 AI工具王 提供的 AI
+              模型租賃服務，使用起來非常方便，而且效果非常好。對於我們公司的業務來說，這個服務非常重要，因為我們需要大量的數據進行分析和預測，AI工具王
+              提供的 AI 模型能夠幫助我們節省大量時間和成本，實在是太棒了！
+            </p>
+            <div className="flex gap-4">
+              <img src={avatar3} alt="avatar3" />
+              <div className="flex flex-col justify-between">
+                <p className="font-bold">陳小姐</p>
+                <p className="text-sm">ABC科技有限公司</p>
+              </div>
+            </div>
+          </div>
+          <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
+            <div className="flex gap-[5px]">
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+            </div>
+            <p className="flex-1 text-black-400 pb-10">
+              作為一家醫療器材公司，我們非常關注人工智能技術的應用，而 AI工具王
+              提供的 AI 模型租賃服務為我們帶來了很大的幫助。我們使用 AI工具王
+              的模型進行醫學影像分析和預測，這些模型非常精確，能夠幫助我們更好地診斷病情，提高治療效果。感謝
+              AI工具王 團隊的辛勤工作！
+            </p>
+            <div className="flex gap-4">
+              <img src={avatar1} alt="avatar1" />
+              <div className="flex flex-col justify-between">
+                <p className="font-bold">劉小姐</p>
+                <p className="text-sm">XYZ 醫療器材有限公司</p>
+              </div>
+            </div>
+          </div>
+          <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
+            <div className="flex gap-[5px]">
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+              <span class="material-symbols-outlined text-base">star</span>
+            </div>
+            <p className="flex-1 text-black-400 pb-10">
+              我們銀行一直在尋找能夠幫助我們提高風險控制和客戶服務的解決方案，而
+              AI工具王 提供的 AI 模型租賃服務正好滿足了我們的需求。我們使用
+              AI工具王
+              的模型進行客戶信用評估和詐騙檢測等任務，這些模型非常準確，能夠幫助我們更好地控制風險，提高客戶滿意度。非常感謝
+              AI工具王 團隊的支持！
+            </p>
+            <div className="flex gap-4">
+              <img src={avatar2} alt="avatar2" />
+              <div className="flex flex-col justify-between">
+                <p className="font-bold">黃先生</p>
+                <p className="text-sm">EFG 銀行</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <ProductSection />
     </>
   );
 };
