@@ -46,7 +46,9 @@ const Home = () => {
             <br />
             讓您的業務更聰明
           </h2>
-          <Button className="" text="開始使用" onClick={handleClick} />
+          <Button className="px-10" onClick={handleClick}>
+            開始使用
+          </Button>
           <MotionIcon className="absolute bottom-0 right-0" />
         </div>
 
@@ -186,11 +188,11 @@ const Home = () => {
         <div className="grid grid-cols-3 gap-6 mb-40">
           <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
             <div className="flex gap-[5px]">
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
             </div>
             <p className="flex-1 text-black-400 pb-10">
               非常喜歡 AI工具王 提供的 AI
@@ -207,11 +209,11 @@ const Home = () => {
           </div>
           <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
             <div className="flex gap-[5px]">
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
             </div>
             <p className="flex-1 text-black-400 pb-10">
               作為一家醫療器材公司，我們非常關注人工智能技術的應用，而 AI工具王
@@ -229,11 +231,11 @@ const Home = () => {
           </div>
           <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
             <div className="flex gap-[5px]">
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
-              <span class="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
+              <span className="material-symbols-outlined text-base">star</span>
             </div>
             <p className="flex-1 text-black-400 pb-10">
               我們銀行一直在尋找能夠幫助我們提高風險控制和客戶服務的解決方案，而
@@ -252,7 +254,20 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <ProductSection />
+
+      <div className="container">
+        <div className="flex flex-col items-center mb-20">
+          <div className="heading01 font-black text-center mb-20">
+            現在就來建立屬於你的服務吧
+          </div>
+          <Button className="pl-10 pr-8" onClick={handleClick}>
+            開始使用
+            <span className="ml-3 material-symbols-outlined">north_east</span>
+          </Button>
+        </div>
+      </div>
     </>
   );
 };
