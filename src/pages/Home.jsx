@@ -1,22 +1,22 @@
-import Button from "@/component/Button";
-import MotionIcon from "@/component/MotionIcon";
-import ProductSection from "@/component/ProductSection";
+import Button from "../component/Button";
+import MotionIcon from "../component/MotionIcon";
+import ProductSection from "../component/ProductSection";
 
-import enterprise1 from "@/assets/enterprise1.png";
-import enterprise2 from "@/assets/enterprise2.png";
-import enterprise3 from "@/assets/enterprise3.png";
-import enterprise4 from "@/assets/enterprise4.png";
-import enterprise5 from "@/assets/enterprise5.png";
-import enterprise6 from "@/assets/enterprise6.png";
-import enterprise7 from "@/assets/enterprise7.png";
-import enterprise8 from "@/assets/enterprise8.png";
-import enterprise9 from "@/assets/enterprise9.png";
-import enterprise11 from "@/assets/enterprise11.png";
-import enterprise12 from "@/assets/enterprise12.png";
+import enterprise1 from "../assets/enterprise1.png";
+import enterprise2 from "../assets/enterprise2.png";
+import enterprise3 from "../assets/enterprise3.png";
+import enterprise4 from "../assets/enterprise4.png";
+import enterprise5 from "../assets/enterprise5.png";
+import enterprise6 from "../assets/enterprise6.png";
+import enterprise7 from "../assets/enterprise7.png";
+import enterprise8 from "../assets/enterprise8.png";
+import enterprise9 from "../assets/enterprise9.png";
+import enterprise11 from "../assets/enterprise11.png";
+import enterprise12 from "../assets/enterprise12.png";
 
-import avatar1 from "@/assets/avatar1.png";
-import avatar2 from "@/assets/avatar2.png";
-import avatar3 from "@/assets/avatar3.png";
+import avatar1 from "../assets/avatar1.png";
+import avatar2 from "../assets/avatar2.png";
+import avatar3 from "../assets/avatar3.png";
 
 // const AdvantageCard = ({ children }) => {
 //   return (

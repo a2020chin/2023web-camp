@@ -1,4 +1,4 @@
-import deco from "@/assets/deco.png";
+import deco from "../assets/deco.png";
 
 import PropTypes from "prop-types";
 

@@ -1,3 +1,4 @@
+import DropdownMenu from "./Dropdownmune";
 import ProductCard from "./ProductCard";
 
 const ProductSection = () => {
@@ -26,6 +27,8 @@ const ProductSection = () => {
               name="search"
             />
           </label>
+          <DropdownMenu></DropdownMenu>
+
 
           <ul className="grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ProductCard
@@ -195,9 +198,10 @@ const ProductSection = () => {
           <nav className="flex justify-end">
             <ul className="flex items-center gap-x-1">
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input className="sr-only peer" type="radio" name="pagination" value="1" id="Pagination1" />
+                <label
+                  htmlFor="Pagination1"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   <span className="sr-only">Previous</span>
                   <svg
@@ -213,7 +217,7 @@ const ProductSection = () => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </a>
+                </label>
               </li>
               <li>
                 <a
