@@ -234,7 +234,6 @@ const ProductSection = () => {
                   name="pagination"
                   value="1"
                   id="pagination1"
-                  checked
                 />
                 <label
                   htmlFor="pagination1"
