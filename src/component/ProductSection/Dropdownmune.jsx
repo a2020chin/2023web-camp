@@ -2,10 +2,14 @@ import { useState } from "react";
 
 import { useTransition, animated, config } from "@react-spring/web";
 
+
+
+
+
 const Dropdownmune = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [aimodelValue, setAimodelValue] = useState("aimodelall");
-  const [aitypeValue, setAitypeValue] = useState("aitypeall");
+  const [aitypeValue, setAitypeValue] = useState(["aitypeall"]);
 
   const aimodelSelect = [
     { id: "aimodelall", value: "aimodelall", label: "所有模型" },
@@ -53,16 +57,53 @@ const Dropdownmune = () => {
     setAimodelValue(e.target.value);
   };
   const aitypeValueChange = (e) => {
-    setAitypeValue(e.target.value);
+    console.log(e.target.value.includes(aitypeValue));
+    if (!e.target.value.includes(aitypeValue)) {
+      setAitypeValue([...aitypeValue, e.target.value]);
+    }
   };
+
+  const MuneItem = ({ id, value, label }) => {
+    return (
+      <li
+        key={`aimodelSelect-${id}`}
+        className="hover:bg-black-200"
+      >
+        <label
+          className="pl-10 pr-8 py-2 flex justify-between items-center cursor-pointer"
+          htmlFor={id}
+        >
+          {label}
+          <input
+            type="radio"
+            name="aimodel"
+            value={value}
+            id={id}
+            onChange={aitypeValueChange}
+            className="sr-only"
+          />
+          {aitypeTransitions(
+            (aimodelstyle, aimodelitem) =>
+              value.includes(aimodelitem) && (
+                <animated.div
+                  className="overflow-hidden material-symbols-outlined"
+                  style={aimodelstyle}
+                >
+                  done
+                </animated.div>
+              )
+          )}
+        </label>
+      </li>
+    )
+  }
 
   return (
     <div className="relative z-10">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center px-10 py-5 text-black-1000 border rounded-2xl hover:bg-gray-300 ${
-          isOpen ? "border-black-1000" : ""
-        }`}
+        className={`flex items-center px-10 py-5 text-black-1000 border rounded-2xl hover:bg-gray-300 ${isOpen ? "border-black-1000" : ""
+          }`}
       >
         <p className="mr-2 flex">
           篩選
@@ -85,37 +126,37 @@ const Dropdownmune = () => {
                     AI 模型
                   </h5>
                 </li>
-                {aimodelSelect.map(({ id, value, label }) => (
-                  <li
-                    key={`aimodelSelect-${id}`}
-                    className="hover:bg-black-200"
-                  >
-                    <label
-                      className="pl-10 pr-8 py-2 flex justify-between items-center cursor-pointer"
-                      htmlFor={id}
-                    >
-                      {label}
-                      <input
-                        type="radio"
-                        name="aimodel"
-                        value={value}
-                        id={id}
-                        onChange={aimodelValueChange}
-                        className="sr-only"
-                      />
-                      {aimodelTransitions(
-                        (aimodelstyle, aimodelitem) =>
-                          aimodelitem === value && (
-                            <animated.div
-                              className="overflow-hidden material-symbols-outlined"
-                              style={aimodelstyle}
-                            >
-                              done
-                            </animated.div>
-                          )
-                      )}
-                    </label>
-                  </li>
+                {aimodelSelect.map(({ id, value, label }) => (<MuneItem key={`aimodelSelect-${id}`} id={id} value={value} label={label} />
+                  // <li
+                  //   key={`aimodelSelect-${id}`}
+                  //   className="hover:bg-black-200"
+                  // >
+                  //   <label
+                  //     className="pl-10 pr-8 py-2 flex justify-between items-center cursor-pointer"
+                  //     htmlFor={id}
+                  //   >
+                  //     {label}
+                  //     <input
+                  //       type="radio"
+                  //       name="aimodel"
+                  //       value={value}
+                  //       id={id}
+                  //       onChange={aimodelValueChange}
+                  //       className="sr-only"
+                  //     />
+                  //     {aimodelTransitions(
+                  //       (aimodelstyle, aimodelitem) =>
+                  //         aimodelitem === value && (
+                  //           <animated.div
+                  //             className="overflow-hidden material-symbols-outlined"
+                  //             style={aimodelstyle}
+                  //           >
+                  //             done
+                  //           </animated.div>
+                  //         )
+                  //     )}
+                  //   </label>
+                  // </li>
                 ))}
               </ul>
               <div className="pl-10 pr-8 mt-3 mb-5">
@@ -147,7 +188,7 @@ const Dropdownmune = () => {
                       />
                       {aitypeTransitions(
                         (aimodelstyle, aimodelitem) =>
-                          aimodelitem === value && (
+                          value.includes(aimodelitem) && (
                             <animated.div
                               className="overflow-hidden material-symbols-outlined"
                               style={aimodelstyle}

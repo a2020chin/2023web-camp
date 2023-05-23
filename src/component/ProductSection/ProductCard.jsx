@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const ProductCard = ({ img, title, content, model, author, hashtag }) => {
   return (

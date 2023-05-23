@@ -1,6 +1,5 @@
 import Logo from "@/assets/logo.png";
 
-import React from "react";
 
 const Footer = () => {
   const toTop = () => {
@@ -17,9 +16,9 @@ const Footer = () => {
         </ul>
         <img className="h-10 object-cover" src={Logo} alt="" />
       </div>
-      <div className="flex gap-[100px] border-t-[1px] py-8">
+      <div className="flex flex-wrap justify-between border-t-[1px] py-8 lg:gap-[100px]">
         <p>AI工具王 © 2023</p>
-        <nav className="flex-1">
+        <nav className="w-full order-3 lg:flex-1 lg:order-none ">
           <ul className="flex gap-5">
             <li>Facebook</li>
             <li>Twitter</li>
