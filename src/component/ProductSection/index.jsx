@@ -27,8 +27,10 @@ const ProductSection = () => {
               name="search"
             />
           </label>
-          <DropdownMenu></DropdownMenu>
 
+          <div className="mb-10">
+            <DropdownMenu></DropdownMenu>
+          </div>
 
           <ul className="grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ProductCard
@@ -198,9 +200,15 @@ const ProductSection = () => {
           <nav className="flex justify-end">
             <ul className="flex items-center gap-x-1">
               <li>
-                <input className="sr-only peer" type="radio" name="pagination" value="1" id="Pagination1" />
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="-1"
+                  id="back"
+                />
                 <label
-                  htmlFor="Pagination1"
+                  htmlFor="back"
                   className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   <span className="sr-only">Previous</span>
@@ -220,50 +228,91 @@ const ProductSection = () => {
                 </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="1"
+                  id="pagination1"
+                />
+                <label
+                  htmlFor="pagination1"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   1
-                </a>
+                </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="2"
+                  id="pagination2"
+                />
+                <label
+                  htmlFor="pagination2"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   2
-                </a>
+                </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="3"
+                  id="pagination3"
+                />
+                <label
+                  htmlFor="pagination3"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   3
-                </a>
+                </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="4"
+                  id="pagination4"
+                />
+                <label
+                  htmlFor="pagination4"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   4
-                </a>
+                </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="5"
+                  id="pagination5"
+                />
+                <label
+                  htmlFor="pagination5"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   5
-                </a>
+                </label>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                <input
+                  className="sr-only peer"
+                  type="radio"
+                  name="pagination"
+                  value="+1"
+                  id="next"
+                />
+                <label
+                  htmlFor="next"
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
                 >
                   <span className="sr-only">Next</span>
                   <svg
@@ -279,7 +328,7 @@ const ProductSection = () => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </a>
+                </label>
               </li>
             </ul>
           </nav>

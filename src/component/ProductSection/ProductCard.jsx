@@ -21,10 +21,9 @@ const ProductCard = ({ img, title, content, model, author, hashtag }) => {
       <div className="flex justify-between items-center px-8 py-5">
         <p>{hashtag}</p>
         <a href="#" className="w-[18px] h-[18px]">
-          <img
-            src="https://github.com/hexschool/2022-web-layout-training/blob/main/2023web-camp/icons/share.png?raw=true"
-            alt="share"
-          />
+          <span className="text-[18px] font-bold material-symbols-outlined">
+            share
+          </span>
         </a>
       </div>
     </li>
