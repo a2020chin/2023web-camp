@@ -18,37 +18,40 @@ import avatar1 from "../assets/avatar1.png";
 import avatar2 from "../assets/avatar2.png";
 import avatar3 from "../assets/avatar3.png";
 
-// const AdvantageCard = ({ children }) => {
-//   return (
-//     <>
-//       <div className="border-[1px] border-solid border-[#525252] rounded-2xl px-10 py-20">
-//         {children}
-//       </div>
-//     </>
-//   );
-// };
+import { useTransition, animated, config } from "@react-spring/web";
+
+const textItems = ["透過", "AI 工具王的", "強大模型", "讓您的業務更聰明"];
 
 const Home = () => {
   const handleClick = () => {
     console.log("Button clicked!");
   };
 
+  const transitions = useTransition(textItems, {
+    from: { opacity: 0, transform: "translateY(100vh)" },
+    enter: { opacity: 1, transform: "translateY(0px)" },
+    config: config.slow,
+    trail: 300,
+  });
+
   return (
     <>
       <div className="container">
         <div className="relative h-[calc(100vh_-_80px)] mb-40">
-          <h2 className="display02 font-black py-10">
-            透過
-            <br />
-            AI 工具王的
-            <br />
-            強大模型
-            <br />
-            讓您的業務更聰明
-          </h2>
-          <Button className="px-10" onClick={handleClick}>
-            開始使用
-          </Button>
+          <div className="text-heading01 w-3/4 font-black py-10 md:text-display03 md:w-auto lg:text-display02">
+            {transitions((style, item) => (
+              <animated.h2 style={style}>{item}</animated.h2>
+            ))}
+          </div>
+          {transitions((style, item, t, i) => (
+            <animated.div style={style} className="mt-4">
+              {i === textItems.length - 1 && (
+                <Button className="px-10" onClick={handleClick}>
+                  開始使用
+                </Button>
+              )}
+            </animated.div>
+          ))}
           <MotionIcon className="absolute bottom-0 right-0" />
         </div>
 

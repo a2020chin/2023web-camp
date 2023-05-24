@@ -1,4 +1,4 @@
-import DropdownMenu from "./Dropdownmune";
+import FilterProduct from "./FilterProduct";
 import ProductCard from "./ProductCard";
 
 const ProductSection = () => {
@@ -29,7 +29,7 @@ const ProductSection = () => {
           </label>
 
           <div className="mb-10">
-            <DropdownMenu></DropdownMenu>
+            <FilterProduct></FilterProduct>
           </div>
 
           <ul className="grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
