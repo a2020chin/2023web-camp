@@ -31,7 +31,7 @@ const FilterProduct = () => {
     <FilterProductContext.Provider
       value={{ aimodelValue, setAimodelValue, aitypeValue, setAitypeValue }}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-10">
         <DropdownMune
           aimodelSelect={aimodelSelect}
           aitypeSelect={aitypeSelect}

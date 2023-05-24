@@ -1,7 +1,31 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import queryString from "query-string";
+
 import FilterProduct from "./FilterProduct";
 import ProductCard from "./ProductCard";
 
 const ProductSection = () => {
+  const [product, setProduct] = useState(null);
+  const [type, setType] = useState("");
+  const [sort, setSort] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const query = queryString.stringify({ type, sort });
+        const url = `https://2023-engineer-camp.zeabur.app/api/v1/works/?${query}`;
+        const response = await axios.get(url);
+        setProduct(response.data?.ai_works?.data);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [sort, type]);
+
   return (
     <>
       <div className="bg-black-0 rounded-[160px] w-full py-40 mb-20">
@@ -28,24 +52,32 @@ const ProductSection = () => {
             />
           </label>
 
-          <div className="mb-10">
-            <FilterProduct></FilterProduct>
-          </div>
+          <FilterProduct />
 
           <ul className="grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ProductCard
-              img={
-                "https://github.com/hexschool/2022-web-layout-training/blob/main/2023web-camp/tool1.png?raw=true"
-              }
-              title={"Chatbot Builder"}
-              content={
-                "建立智能化的聊天機器人，解答常見問題、提供客戶支援、收集反饋等。"
-              }
-              model={"AI 模型"}
-              author={"卡卡"}
-              hashtag={"#聊天"}
-            />
-            <li className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000">
+            {product &&
+              product.map(
+                ({
+                  description,
+                  discordId,
+                  id,
+                  imageUrl,
+                  model,
+                  title,
+                  type,
+                }) => (
+                  <ProductCard
+                    key={id}
+                    img={imageUrl}
+                    title={title}
+                    content={description}
+                    model={model}
+                    author={discordId}
+                    type={type}
+                  />
+                )
+              )}
+            {/* <li className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000">
               <div className="overflow-hidden">
                 <img
                   className="w-full object-cover duration-500 group-hover:scale-150"
@@ -194,7 +226,7 @@ const ProductSection = () => {
                   />
                 </a>
               </div>
-            </li>
+            </li> */}
           </ul>
 
           <nav className="flex justify-end">

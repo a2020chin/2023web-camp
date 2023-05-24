@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const ProductCard = ({ img, title, content, model, author, hashtag }) => {
+const ProductCard = ({ img, title, content, model, author, type }) => {
   return (
     <li className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000">
       <div className="overflow-hidden">
@@ -19,7 +19,7 @@ const ProductCard = ({ img, title, content, model, author, hashtag }) => {
         <p>{author}</p>
       </div>
       <div className="flex justify-between items-center px-8 py-5">
-        <p>{hashtag}</p>
+        <p>{type}</p>
         <a href="#" className="w-[18px] h-[18px]">
           <span className="text-[18px] font-bold material-symbols-outlined">
             share
@@ -36,7 +36,7 @@ ProductCard.propTypes = {
   content: PropTypes.string.isRequired,
   model: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  hashtag: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ProductCard;
