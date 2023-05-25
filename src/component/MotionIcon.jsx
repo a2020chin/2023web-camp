@@ -1,37 +1,70 @@
-import { motion } from "framer-motion";
-
+import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import deco from "../assets/deco.png";
 
 const MotionIcon = ({ className }) => {
+  const imageAnimations = [useAnimation(), useAnimation(), useAnimation()];
+
+  useEffect(() => {
+    const sequenceAnimation = async () => {
+      await Promise.all(
+        imageAnimations.map((animation, index) =>
+          animation.start({
+            y: "0%",
+            transition: { duration: 1, delay: index * 0.5 },
+          })
+        )
+      );
+
+      await Promise.all(
+        imageAnimations.map((animation) =>
+          animation.start({ y: "0%", transition: { duration: 0.3 } })
+        )
+      );
+
+      await Promise.all(
+        imageAnimations.map((animation, index) =>
+          animation.start({
+            y: "-100%",
+            transition: { duration: 1, delay: index * 0.5 },
+          })
+        )
+      );
+
+      await Promise.all(
+        imageAnimations.map((animation) =>
+          animation.start({ y: "-100%", transition: { duration: 0.3 } })
+        )
+      );
+
+      await Promise.all(
+        imageAnimations.map((animation) =>
+          animation.start({ y: "100%", transition: { duration: 0 } })
+        )
+      );
+
+      sequenceAnimation();
+    };
+
+    sequenceAnimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <motion.div
-      className={`flex overflow-hidden ${className}`}
-      transition={{ staggerChildren: 3 }}
-    >
-      <motion.img
-        initial={{ y: "-100%", transition: { duration: 1 } }}
-        animate={{ y: "100%", transition: { duration: 1 } }}
-        transition={{ duration: 3 }}
-        src={deco}
-        alt=""
-      />
-      <motion.img
-        initial={{ y: "-100%", transition: { duration: 1 } }}
-        animate={{ y: "100%", transition: { duration: 1 } }}
-        transition={{ duration: 3 }}
-        src={deco}
-        alt=""
-      />
-      <motion.img
-        initial={{ y: "-100%", transition: { duration: 1 } }}
-        animate={{ y: "100%", transition: { duration: 1 } }}
-        transition={{ duration: 3 }}
-        src={deco}
-        alt=""
-      />
-    </motion.div>
+    <div className={`flex flex-row-reverse overflow-hidden ${className}`}>
+      {imageAnimations.map((animation, index) => (
+        <motion.img
+          key={index}
+          className=""
+          src={deco}
+          alt=""
+          initial={{ y: "100%" }}
+          animate={animation}
+        />
+      ))}
+    </div>
   );
 };
 MotionIcon.propTypes = {

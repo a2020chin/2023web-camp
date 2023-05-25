@@ -26,19 +26,27 @@ const DropdownSort = () => {
         }`}
       >
         <div className="flex">
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mr-2"
-          >
-            {sortSelect[toSort].label}
-          </motion.p>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={sortSelect[toSort].label}
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 5 }}
+              transition={{ duration: 0.2 }}
+              className="mr-2"
+            >
+              {sortSelect[toSort].label}
+            </motion.p>
+          </AnimatePresence>
 
           <motion.span
             initial={{ rotate: 0 }}
             animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{
+              type: "spring",
+              stiffness: 350,
+              damping: 20,
+            }}
             className="text-base font-bold material-symbols-outlined"
           >
             expand_more
@@ -52,7 +60,11 @@ const DropdownSort = () => {
             initial={{ opacity: 0, scale: 0.9, transformOrigin: "top right" }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
+            transition={{
+              type: "spring",
+              stiffness: 350,
+              damping: 25,
+            }}
             className="absolute right-0 z-10 py-5 w-36 mt-2 bg-white rounded-2xl shadow-cardshaow"
           >
             <ul className="flex flex-col text-black-1000">

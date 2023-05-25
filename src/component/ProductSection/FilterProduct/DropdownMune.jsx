@@ -76,8 +76,7 @@ const DropdownMune = (prop) => {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{
               type: "spring",
-              duration: 0.5,
-              stiffness: 500,
+              stiffness: 350,
               damping: 25,
             }}
             className="absolute z-10 py-5 w-60 mt-2 bg-white rounded-2xl shadow-cardshaow"
