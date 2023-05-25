@@ -48,6 +48,25 @@ export default {
     },
     boxShadow: {
       'cardshaow': '0px 4px 20px rgba(0, 0, 0, 0.15)',
+    },
+    keyframes: {
+      'decoimg': {
+        '0%': {
+          transform: 'translateY(100%)'
+        },
+        // '30%':{
+        //   transform: 'translateY(0%)'
+        // },
+        // '50%': {
+        //   transform: 'translateY(0%)'
+        // },
+        '100%': {
+          transform: 'translateY(-100%)'
+        }
+      }
+    },
+    animation: {
+      'decoimg': 'decoimg 1s ease-in-out infinite',
     }
   },
   // eslint-disable-next-line no-undef

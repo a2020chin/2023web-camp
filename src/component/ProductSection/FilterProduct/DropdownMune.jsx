@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useFilterProduct } from "../../Context";
+import { motion, AnimatePresence } from "framer-motion";
+// import { useTransition, animated, config } from "@react-spring/web";
 
-import { useTransition, animated, config } from "@react-spring/web";
 import DropdownOption from "./DropdownOption";
 
 const DropdownMune = (prop) => {
@@ -9,56 +10,46 @@ const DropdownMune = (prop) => {
   const { aimodelValue, aitypeValue, setAitypeValue, setAimodelValue } =
     useFilterProduct();
 
-  const transitions = useTransition(isOpen, {
-    from: {
-      opacity: 0,
-      transform: `scale(${0.9})`,
-      transformOrigin: "top left",
-    },
-    enter: { opacity: 1, transform: `scale(${1})` },
-    leave: { opacity: 0, transform: `scale(${0.9})` },
-    config: config.wobbly,
-  });
+  // const transitions = useTransition(isOpen, {
+  //   from: {
+  //     opacity: 0,
+  //     transform: `scale(${0.9})`,
+  //     transformOrigin: "top left",
+  //   },
+  //   enter: { opacity: 1, transform: `scale(${1})` },
+  //   leave: { opacity: 0, transform: `scale(${0.9})` },
+  //   config: config.wobbly,
+  // });
 
   const aimodelValueChange = (e) => {
-    if (
-      !aimodelValue.includes("aimodelall") &&
-      aimodelValue.includes(e.target.value)
-    ) {
+    if (!aimodelValue.includes("") && aimodelValue.includes(e.target.value)) {
       setAimodelValue(aimodelValue.filter((value) => value !== e.target.value));
 
       //  useState並不會立即改變該狀態的值，而是將更新排入隊列中，在下一個渲染周期時才會生效
       if (aimodelValue.length === 1) {
-        setAimodelValue((prevValue) => [...prevValue, "aimodelall"]);
+        setAimodelValue((prevValue) => [...prevValue, ""]);
       }
-    } else if (aimodelValue.length > 0 && e.target.value === "aimodelall") {
-      setAimodelValue(["aimodelall"]);
+    } else if (aimodelValue.length > 0 && e.target.value === "") {
+      setAimodelValue([""]);
     } else {
       setAimodelValue((prevValue) => [...prevValue, e.target.value]);
-      setAimodelValue((prevValue) =>
-        prevValue.filter((value) => value !== "aimodelall")
-      );
+      setAimodelValue((prevValue) => prevValue.filter((value) => value !== ""));
     }
   };
 
   const aitypeValueChange = (e) => {
-    if (
-      !aitypeValue.includes("aitypeall") &&
-      aitypeValue.includes(e.target.value)
-    ) {
+    if (!aitypeValue.includes("") && aitypeValue.includes(e.target.value)) {
       setAitypeValue(aitypeValue.filter((value) => value !== e.target.value));
 
       //  useState並不會立即改變該狀態的值，而是將更新排入隊列中，在下一個渲染周期時才會生效
       if (aitypeValue.length === 1) {
-        setAitypeValue((prevValue) => [...prevValue, "aitypeall"]);
+        setAitypeValue((prevValue) => [...prevValue, ""]);
       }
-    } else if (aitypeValue.length > 0 && e.target.value === "aitypeall") {
-      setAitypeValue(["aitypeall"]);
+    } else if (aitypeValue.length > 0 && e.target.value === "") {
+      setAitypeValue([""]);
     } else {
       setAitypeValue((prevValue) => [...prevValue, e.target.value]);
-      setAitypeValue((prevValue) =>
-        prevValue.filter((value) => value !== "aitypeall")
-      );
+      setAitypeValue((prevValue) => prevValue.filter((value) => value !== ""));
     }
   };
 
@@ -77,46 +68,52 @@ const DropdownMune = (prop) => {
           </span>
         </p>
       </button>
-
-      {transitions(
-        (style, item) =>
-          item && (
-            <animated.div
-              style={style}
-              className="absolute z-10 py-5 w-60 mt-2 bg-white rounded-2xl shadow-cardshaow"
-            >
-              <ul className="flex flex-col mb-4 text-black-1000">
-                <li className="py-1">
-                  <h5 className="pl-10 text-sm font-bold leading-[18px] text-black-600">
-                    AI 模型
-                  </h5>
-                </li>
-                <DropdownOption
-                  options={prop.aimodelSelect}
-                  data={aimodelValue}
-                  onChange={aimodelValueChange}
-                  checkIcon={true}
-                />
-              </ul>
-              <div className="pl-10 pr-8 mt-3 mb-5">
-                <div className="border-b border-black-200"></div>
-              </div>
-              <ul className="flex flex-col mb-4 text-black-1000">
-                <li className="py-1">
-                  <h5 className="pl-10 text-sm font-bold leading-[18px] text-black-600">
-                    類型
-                  </h5>
-                </li>
-                <DropdownOption
-                  options={prop.aitypeSelect}
-                  data={aitypeValue}
-                  onChange={aitypeValueChange}
-                  checkIcon={true}
-                />
-              </ul>
-            </animated.div>
-          )
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, transformOrigin: "top left" }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{
+              type: "spring",
+              duration: 0.5,
+              stiffness: 500,
+              damping: 25,
+            }}
+            className="absolute z-10 py-5 w-60 mt-2 bg-white rounded-2xl shadow-cardshaow"
+          >
+            <ul className="flex flex-col mb-4 text-black-1000">
+              <li className="py-1">
+                <h5 className="pl-10 text-sm font-bold leading-[18px] text-black-600">
+                  AI 模型
+                </h5>
+              </li>
+              <DropdownOption
+                options={prop.aimodelSelect}
+                data={aimodelValue}
+                onChange={aimodelValueChange}
+                checkIcon={true}
+              />
+            </ul>
+            <div className="pl-10 pr-8 mt-3 mb-5">
+              <div className="border-b border-black-200"></div>
+            </div>
+            <ul className="flex flex-col mb-4 text-black-1000">
+              <li className="py-1">
+                <h5 className="pl-10 text-sm font-bold leading-[18px] text-black-600">
+                  類型
+                </h5>
+              </li>
+              <DropdownOption
+                options={prop.aitypeSelect}
+                data={aitypeValue}
+                onChange={aitypeValueChange}
+                checkIcon={true}
+              />
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

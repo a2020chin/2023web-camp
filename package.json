@@ -16,6 +16,7 @@
     "@heroicons/react": "^2.0.18",
     "@react-spring/web": "^9.7.2",
     "axios": "^1.4.0",
+    "framer-motion": "^10.12.16",
     "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "query-string": "^8.1.0",

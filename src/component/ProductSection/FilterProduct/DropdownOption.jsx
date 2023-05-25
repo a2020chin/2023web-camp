@@ -1,15 +1,7 @@
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
-import { useTransition, animated } from "@react-spring/web";
-
 function DropdownOption({ options, onChange, data, checkIcon }) {
-  const transitions = useTransition(data, {
-    key: data,
-    from: { opacity: 0, transform: "scale(0.8)" },
-    enter: { opacity: 1, transform: "scale(1)" },
-    leave: { opacity: 0, transform: "scale(0.8)" },
-  });
-
   return (
     <div>
       {options.map(({ id, value, label, name }) => (
@@ -28,24 +20,24 @@ function DropdownOption({ options, onChange, data, checkIcon }) {
             htmlFor={id}
           >
             {label}
-            {checkIcon &&
-              transitions(
-                (style, item) =>
-                  item.includes(value) && (
-                    <animated.div
-                      className="overflow-hidden material-symbols-outlined"
-                      style={style}
-                    >
-                      done
-                    </animated.div>
-                  )
-              )}
+            {checkIcon && data.includes(value) && (
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden material-symbols-outlined"
+              >
+                done
+              </motion.span>
+            )}
           </label>
         </li>
       ))}
     </div>
   );
 }
+
 DropdownOption.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -55,7 +47,10 @@ DropdownOption.propTypes = {
       name: PropTypes.string.isRequired,
     })
   ).isRequired,
-  data: PropTypes.arrayOf(PropTypes.string.isRequired),
+  data: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
   onChange: PropTypes.func.isRequired,
   checkIcon: PropTypes.bool.isRequired,
 };

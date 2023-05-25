@@ -43,15 +43,12 @@ const Home = () => {
               <animated.h2 style={style}>{item}</animated.h2>
             ))}
           </div>
-          {transitions((style, item, t, i) => (
-            <animated.div style={style} className="mt-4">
-              {i === textItems.length - 1 && (
-                <Button className="px-10" onClick={handleClick}>
-                  開始使用
-                </Button>
-              )}
-            </animated.div>
-          ))}
+          <div className="mt-4">
+            <Button className="px-10" onClick={handleClick}>
+              開始使用
+            </Button>
+          </div>
+
           <MotionIcon className="absolute bottom-0 right-0" />
         </div>
 

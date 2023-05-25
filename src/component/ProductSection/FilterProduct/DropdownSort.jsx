@@ -1,45 +1,20 @@
 import { useState } from "react";
-import { useSpring, useTransition, animated, config } from "@react-spring/web";
+import { motion, AnimatePresence } from "framer-motion";
+import { useFilterProduct } from "../../Context";
 
 import DropdownOption from "./DropdownOption";
 
 const DropdownSort = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [toSort, setToSort] = useState(["由新到舊"]);
+  const { toSort, setToSort } = useFilterProduct();
 
   const sortSelect = [
-    { id: "toOld", value: "由新到舊", label: "由新到舊", name: "toSort" },
-    { id: "toNew", value: "由舊到新", label: "由舊到新", name: "toSort" },
+    { id: "toOld", value: "0", label: "由新到舊", name: "toSort" },
+    { id: "toNew", value: "1", label: "由舊到新", name: "toSort" },
   ];
 
-  const transitions = useTransition(isOpen, {
-    from: {
-      opacity: 0,
-      transform: `scale(${0.9})`,
-      transformOrigin: "top right",
-    },
-    enter: { opacity: 1, transform: `scale(${1})` },
-    leave: { opacity: 0, transform: `scale(${0.9})` },
-    config: config.wobbly,
-  });
-
-  const springProps = useSpring({
-    transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-    config: config.wobbly,
-  });
-
-  const textAnimation = useTransition(toSort, {
-    from: { opacity: 0, transform: "translateY(-20px)" },
-    enter: { opacity: 1, transform: "translateY(0px)" },
-    config: { mass: 1, tension: 2000, friction: 200 },
-    trail: 200, // 每個元素之間的延遲時間
-    keys: toSort, // 使用元素本身作為 key
-  });
-
   const sortValueChange = (e) => {
-    e.target.value === "由新到舊"
-      ? setToSort(() => ["由新到舊"])
-      : setToSort(() => ["由舊到新"]);
+    e.target.value === "0" ? setToSort(() => "0") : setToSort(() => "1");
   };
 
   return (
@@ -51,39 +26,46 @@ const DropdownSort = () => {
         }`}
       >
         <div className="flex">
-          {textAnimation((style) => (
-            <animated.p className="mr-2" style={style}>
-              {toSort}
-            </animated.p>
-          ))}
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mr-2"
+          >
+            {sortSelect[toSort].label}
+          </motion.p>
 
-          <animated.span
+          <motion.span
+            initial={{ rotate: 0 }}
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
             className="text-base font-bold material-symbols-outlined"
-            style={springProps}
           >
             expand_more
-          </animated.span>
+          </motion.span>
         </div>
       </button>
 
-      {transitions(
-        (style, item) =>
-          item && (
-            <animated.div
-              style={style}
-              className="absolute right-0 z-10 py-5 w-36 mt-2 bg-white rounded-2xl shadow-cardshaow"
-            >
-              <ul className="flex flex-col mb-4 text-black-1000">
-                <DropdownOption
-                  options={sortSelect}
-                  data={toSort}
-                  onChange={sortValueChange}
-                  checkIcon={false}
-                />
-              </ul>
-            </animated.div>
-          )
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, transformOrigin: "top right" }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            className="absolute right-0 z-10 py-5 w-36 mt-2 bg-white rounded-2xl shadow-cardshaow"
+          >
+            <ul className="flex flex-col text-black-1000">
+              <DropdownOption
+                options={sortSelect}
+                data={[sortSelect[toSort].label]}
+                onChange={sortValueChange}
+                checkIcon={false}
+              />
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

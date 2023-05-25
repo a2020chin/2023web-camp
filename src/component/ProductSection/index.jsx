@@ -2,18 +2,24 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import queryString from "query-string";
 
+import { FilterProductContext } from "../Context";
+
 import FilterProduct from "./FilterProduct";
 import ProductCard from "./ProductCard";
 
 const ProductSection = () => {
   const [product, setProduct] = useState(null);
-  const [type, setType] = useState("");
-  const [sort, setSort] = useState("");
+  const [aimodelValue, setAimodelValue] = useState([""]);
+  const [aitypeValue, setAitypeValue] = useState([""]);
+  const [toSort, setToSort] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const query = queryString.stringify({ type, sort });
+        const query = queryString.stringify({
+          type: aitypeValue,
+          sort: toSort,
+        });
         const url = `https://2023-engineer-camp.zeabur.app/api/v1/works/?${query}`;
         const response = await axios.get(url);
         setProduct(response.data?.ai_works?.data);
@@ -24,10 +30,19 @@ const ProductSection = () => {
     };
 
     fetchData();
-  }, [sort, type]);
+  }, [aitypeValue, toSort]);
 
   return (
-    <>
+    <FilterProductContext.Provider
+      value={{
+        aimodelValue,
+        setAimodelValue,
+        aitypeValue,
+        setAitypeValue,
+        toSort,
+        setToSort,
+      }}
+    >
       <div className="bg-black-0 rounded-[160px] w-full py-40 mb-20">
         <div className="container">
           <h2 className="display03 text-black-1000 font-black text-center mb-20">
@@ -366,7 +381,7 @@ const ProductSection = () => {
           </nav>
         </div>
       </div>
-    </>
+    </FilterProductContext.Provider>
   );
 };
 

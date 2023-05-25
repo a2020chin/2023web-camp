@@ -4,23 +4,18 @@ const AitypeSelectMune = (prop) => {
   const { aitypeValue, setAitypeValue } = useFilterProduct();
 
   const aitypeValueChange = (e) => {
-    if (
-      !aitypeValue.includes("aitypeall") &&
-      aitypeValue.includes(e.target.value)
-    ) {
+    if (!aitypeValue.includes("") && aitypeValue.includes(e.target.value)) {
       setAitypeValue(aitypeValue.filter((value) => value !== e.target.value));
 
       //  useState並不會立即改變該狀態的值，而是將更新排入隊列中，在下一個渲染周期時才會生效
       if (aitypeValue.length === 1) {
-        setAitypeValue((prevValue) => [...prevValue, "aitypeall"]);
+        setAitypeValue((prevValue) => [...prevValue, ""]);
       }
-    } else if (aitypeValue.length > 0 && e.target.value === "aitypeall") {
-      setAitypeValue(["aitypeall"]);
+    } else if (aitypeValue.length > 0 && e.target.value === "") {
+      setAitypeValue([""]);
     } else {
       setAitypeValue((prevValue) => [...prevValue, e.target.value]);
-      setAitypeValue((prevValue) =>
-        prevValue.filter((value) => value !== "aitypeall")
-      );
+      setAitypeValue((prevValue) => prevValue.filter((value) => value !== ""));
     }
   };
   return (
@@ -33,7 +28,7 @@ const AitypeSelectMune = (prop) => {
             value={value}
             id={id}
             onChange={aitypeValueChange}
-            checked={prop.data.includes(value)}
+            checked={aitypeValue.includes(value)}
             className="sr-only peer"
           />
           <label
