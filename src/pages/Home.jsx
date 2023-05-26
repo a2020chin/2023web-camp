@@ -1,4 +1,4 @@
-import Button from "../component/Button";
+// import Button from "../component/Button";
 import MotionIcon from "../component/MotionIcon";
 import ProductSection from "../component/ProductSection";
 
@@ -11,8 +11,8 @@ import enterprise6 from "../assets/enterprise6.png";
 import enterprise7 from "../assets/enterprise7.png";
 import enterprise8 from "../assets/enterprise8.png";
 import enterprise9 from "../assets/enterprise9.png";
-import enterprise11 from "../assets/enterprise11.png";
-import enterprise12 from "../assets/enterprise12.png";
+import enterprise10 from "../assets/enterprise11.png";
+import enterprise11 from "../assets/enterprise12.png";
 
 import avatar1 from "../assets/avatar1.png";
 import avatar2 from "../assets/avatar2.png";
@@ -30,6 +30,7 @@ import {
 import { wrap } from "@motionone/utils";
 import { useRef } from "react";
 import { PropTypes } from "prop-types";
+import { Link } from "react-router-dom";
 
 // import { useTransition, animated, config } from "@react-spring/web";
 // import { motion } from "framer-motion";
@@ -54,8 +55,48 @@ const goodpointCard = [
     context: "我們的服務支持多種擴充選項，可以滿足您的不斷增長的 AI 需求。",
   },
 ];
+const companyImgArr1 = [
+  enterprise1,
+  enterprise2,
+  enterprise3,
+  enterprise4,
+  enterprise5,
+  enterprise6,
+  enterprise1,
+  enterprise2,
+  enterprise3,
+  enterprise4,
+  enterprise5,
+  enterprise6,
+  enterprise1,
+  enterprise2,
+  enterprise3,
+  enterprise4,
+  enterprise5,
+  enterprise6,
+];
+const companyImgArr2 = [
+  enterprise6,
+  enterprise7,
+  enterprise8,
+  enterprise9,
+  enterprise10,
+  enterprise11,
+  enterprise6,
+  enterprise7,
+  enterprise8,
+  enterprise9,
+  enterprise10,
+  enterprise11,
+  enterprise6,
+  enterprise7,
+  enterprise8,
+  enterprise9,
+  enterprise10,
+  enterprise11,
+];
 
-function ParallaxImg({ baseVelocity = 100 }) {
+function ParallaxImg({ baseVelocity = 100, imgArr, className }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -67,7 +108,7 @@ function ParallaxImg({ baseVelocity = 100 }) {
     clamp: false,
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-20, -200, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-10, -93.5, v)}%`);
 
   const directionFactor = useRef(1);
   useAnimationFrame((t, delta) => {
@@ -85,29 +126,57 @@ function ParallaxImg({ baseVelocity = 100 }) {
   });
 
   return (
-    <motion.div className="flex" style={{ x }}>
-      <img className="object-cover" src={enterprise1} alt="enterprise1" />
-      <img className="object-cover" src={enterprise2} alt="enterprise2" />
-      <img className="object-cover" src={enterprise3} alt="enterprise3" />
-      <img className="object-cover" src={enterprise4} alt="enterprise4" />
-      <img className="object-cover" src={enterprise5} alt="enterprise5" />
-      <img className="object-cover" src={enterprise6} alt="enterprise6" />
-      <img className="object-cover" src={enterprise1} alt="enterprise7" />
-      <img className="object-cover" src={enterprise2} alt="enterprise8" />
-      <img className="object-cover" src={enterprise1} alt="enterprise1" />
-      <img className="object-cover" src={enterprise2} alt="enterprise2" />
-      <img className="object-cover" src={enterprise3} alt="enterprise3" />
-      <img className="object-cover" src={enterprise4} alt="enterprise4" />
-      <img className="object-cover" src={enterprise5} alt="enterprise5" />
-      <img className="object-cover" src={enterprise6} alt="enterprise6" />
-      <img className="object-cover" src={enterprise1} alt="enterprise7" />
-      <img className="object-cover" src={enterprise2} alt="enterprise8" />
+    <motion.div className={`flex gap-5 ${className}`} style={{ x }}>
+      {imgArr.map((item, i) => (
+        <img
+          key={`imgArr-${item + i}`}
+          className="w-40 h-10 object-cover"
+          src={item}
+          alt={item}
+        />
+      ))}
+      {/* {imgArr.map((item) => (
+        <img
+          key={`imgArr2-${item}`}
+          className="w-40 h-10 object-cover"
+          src={item}
+          alt={item}
+        />
+      ))}
+      {imgArr.map((item) => (
+        <img
+          key={`imgArr3-${item}`}
+          className="w-40 h-10 object-cover"
+          src={item}
+          alt={item}
+        />
+      ))} */}
     </motion.div>
   );
 }
 
 ParallaxImg.propTypes = {
   baseVelocity: PropTypes.number.isRequired,
+  imgArr: PropTypes.array.isRequired,
+  className: PropTypes.string,
+};
+
+const Button = ({ children, onClick, className }) => {
+  return (
+    <Link
+      className={`inline-block border-[1px] rounded-2xl py-5 ${className}`}
+      onClick={onClick}
+      to="/pricing"
+    >
+      <p className="flex font-black text-xl leading-[1.2]">{children}</p>
+    </Link>
+  );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  className: PropTypes.string.isRequired,
 };
 
 const Home = () => {
@@ -178,93 +247,12 @@ const Home = () => {
         </h3>
         <div className="relative overflow-hidden mb-12 md:mb-40">
           <div className="absolute w-full h-full bg-black-gradient z-50"></div>
-          <ParallaxImg baseVelocity={-5}></ParallaxImg>
-          <ParallaxImg baseVelocity={5}></ParallaxImg>
-          {/* <div className="flex gap-5 overflow-hidden mb-3 md:mb-5">
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise1}
-              alt="enterprise1"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise2}
-              alt="enterprise2"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise3}
-              alt="enterprise3"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise4}
-              alt="enterprise4"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise5}
-              alt="enterprise5"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise6}
-              alt="enterprise6"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise1}
-              alt="enterprise7"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise2}
-              alt="enterprise8"
-            />
-            {/* <img className="w-40 h-10 object-cover" src={enterprise9} alt="enterprise9" /> */}
-          {/* </div>  */}
-          {/* <div className="flex gap-5 overflow-hidden">
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise6}
-              alt="enterprise3"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise7}
-              alt="enterprise4"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise8}
-              alt="enterprise5"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise9}
-              alt="enterprise6"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise11}
-              alt="enterprise7"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise12}
-              alt="enterprise8"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise6}
-              alt="enterprise1"
-            />
-            <img
-              className="w-40 h-10 object-cover"
-              src={enterprise7}
-              alt="enterprise2"
-            />
-          </div> */}
+          <ParallaxImg
+            className="mb-3 md:mb-5"
+            baseVelocity={-5}
+            imgArr={companyImgArr1}
+          ></ParallaxImg>
+          <ParallaxImg baseVelocity={5} imgArr={companyImgArr2}></ParallaxImg>
         </div>
         <div className="grid grid-cols-1 gap-6 mb-[120px] lg:grid-cols-3 lg:mb-40">
           <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
