@@ -7,11 +7,11 @@ const ProductCard = ({ img, title, content, model, author, type }) => {
         <img
           className="w-full object-cover duration-500 group-hover:scale-150"
           src={img}
-          alt="tool1"
+          alt={title}
         />
       </div>
       <div className="flex-1 px-8 py-5 border-b-[1px] border-solid border-black-200">
-        <h3 className="font-black text-xl leading-6 mb-3">{title}</h3>
+        <h3 className="font-black text-heading06 mb-3">{title}</h3>
         <p className="text-sm leading-[21px] text-black-800">{content}</p>
       </div>
       <div className="flex justify-between items-center px-8 py-5 border-b-[1px] border-solid border-black-200">

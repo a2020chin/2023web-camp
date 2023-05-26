@@ -22,9 +22,12 @@ const aitypeSelect = [
 
 const FilterProduct = () => {
   return (
-    <div className="flex justify-between items-center mb-10">
+    <div className="flex justify-between flex-wrap items-center gap-y-4 mb-12 lg:mb-10">
       <DropdownMune aimodelSelect={aimodelSelect} aitypeSelect={aitypeSelect} />
-      <AitypelSelectMune aitypeSelect={aitypeSelect} />
+      <AitypelSelectMune
+        className="order-3 lg:order-none"
+        aitypeSelect={aitypeSelect}
+      />
       <DropdownSort />
     </div>
   );

@@ -1,5 +1,5 @@
 import Logo from "@/assets/logo.png";
-
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const toTop = () => {
@@ -9,14 +9,18 @@ const Footer = () => {
 
   return (
     <footer className="container">
-      <div className="flex justify-between border-t-[1px] py-20">
-        <ul className="flex flex-col items-center gap-1">
-          <li className="display03 font-black">首頁</li>
-          <li className="display03 font-black">定價</li>
+      <div className="flex flex-col-reverse items-start gap-10 border-t-[1px] py-20 md:flex-row md:justify-between">
+        <ul className="flex flex-col items-center gap-2 md:gap-1">
+          <li className="text-heading01 font-black md:text-display03">
+            <Link to="/">首頁</Link>
+          </li>
+          <li className="text-heading01 font-black md:text-display03">
+            <Link to="/pricing">定價</Link>
+          </li>
         </ul>
-        <img className="h-10 object-cover" src={Logo} alt="" />
+        <img className="h-10 object-cover" src={Logo} alt="Logo" />
       </div>
-      <div className="flex flex-wrap justify-between border-t-[1px] py-8 lg:gap-[100px]">
+      <div className="flex flex-wrap justify-between gap-8 border-t-[1px] py-8 lg:gap-[100px]">
         <p>AI工具王 © 2023</p>
         <nav className="w-full order-3 lg:flex-1 lg:order-none ">
           <ul className="flex gap-5">

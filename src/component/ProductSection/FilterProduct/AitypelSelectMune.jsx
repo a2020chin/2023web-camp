@@ -19,24 +19,24 @@ const AitypeSelectMune = (prop) => {
     }
   };
   return (
-    <ul className="flex gap-2">
-      {prop.aitypeSelect.map(({ id, value, label, name }) => (
-        <li key={`AitypeSelectMune-${id}`}>
-          <input
-            type="checkbox"
-            name={name}
-            value={value}
-            id={id}
-            onChange={aitypeValueChange}
-            checked={aitypeValue.includes(value)}
-            className="sr-only peer"
-          />
-          <label
-            className="px-4 py-2 text-black-600 font-bold cursor-pointer rounded-2xl duration-300 hover:bg-neutral-100 hover:text-black-800 peer-checked:bg-black-200 peer-checked:text-black-1000"
+    <ul
+      className={`flex gap-2 mx-auto scrollbarh-hidden overflow-x-auto ${prop.className}`}
+    >
+      {prop.aitypeSelect.map(({ id, value, label }) => (
+        <li key={`AitypeSelectMune-${id}`} className="whitespace-nowrap">
+          <button
+            type="button"
+            className={`inline-block px-4 py-2  font-bold cursor-pointer rounded-2xl duration-300 hover:bg-neutral-100 hover:text-black-800 ${
+              aitypeValue.includes(value)
+                ? "bg-black-200 text-black-1000"
+                : "text-black-600"
+            }`}
             htmlFor={id}
+            onClick={aitypeValueChange}
+            value={value}
           >
             {label}
-          </label>
+          </button>
         </li>
       ))}
     </ul>

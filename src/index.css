@@ -39,3 +39,6 @@ body{
   @apply text-[20px] leading-[1.2]
 }
 
+.scrollbarh-hidden::-webkit-scrollbar {
+  display: none;
+}

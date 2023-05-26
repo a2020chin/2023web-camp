@@ -18,29 +18,117 @@ import avatar1 from "../assets/avatar1.png";
 import avatar2 from "../assets/avatar2.png";
 import avatar3 from "../assets/avatar3.png";
 
-import { useTransition, animated, config } from "@react-spring/web";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from "framer-motion";
+import { wrap } from "@motionone/utils";
+import { useRef } from "react";
+import { PropTypes } from "prop-types";
+
+// import { useTransition, animated, config } from "@react-spring/web";
+// import { motion } from "framer-motion";
 
 const textItems = ["透過", "AI 工具王的", "強大模型", "讓您的業務更聰明"];
+const goodpointCard = [
+  {
+    icon: "flash_on",
+    title: "快速",
+    context:
+      "我們先進的推理基礎設施提供了極短的響應時間，讓你的產品服務不間斷。",
+  },
+  {
+    icon: "auto_awesome",
+    title: "靈活",
+    context:
+      "我們的服務可以根據您的需求進行靈活調整，同時還可以滿足不同項目和預算的需求。",
+  },
+  {
+    icon: "library_add",
+    title: "擴充",
+    context: "我們的服務支持多種擴充選項，可以滿足您的不斷增長的 AI 需求。",
+  },
+];
+
+function ParallaxImg({ baseVelocity = 100 }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  const x = useTransform(baseX, (v) => `${wrap(-20, -200, v)}%`);
+
+  const directionFactor = useRef(1);
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <motion.div className="flex" style={{ x }}>
+      <img className="object-cover" src={enterprise1} alt="enterprise1" />
+      <img className="object-cover" src={enterprise2} alt="enterprise2" />
+      <img className="object-cover" src={enterprise3} alt="enterprise3" />
+      <img className="object-cover" src={enterprise4} alt="enterprise4" />
+      <img className="object-cover" src={enterprise5} alt="enterprise5" />
+      <img className="object-cover" src={enterprise6} alt="enterprise6" />
+      <img className="object-cover" src={enterprise1} alt="enterprise7" />
+      <img className="object-cover" src={enterprise2} alt="enterprise8" />
+      <img className="object-cover" src={enterprise1} alt="enterprise1" />
+      <img className="object-cover" src={enterprise2} alt="enterprise2" />
+      <img className="object-cover" src={enterprise3} alt="enterprise3" />
+      <img className="object-cover" src={enterprise4} alt="enterprise4" />
+      <img className="object-cover" src={enterprise5} alt="enterprise5" />
+      <img className="object-cover" src={enterprise6} alt="enterprise6" />
+      <img className="object-cover" src={enterprise1} alt="enterprise7" />
+      <img className="object-cover" src={enterprise2} alt="enterprise8" />
+    </motion.div>
+  );
+}
+
+ParallaxImg.propTypes = {
+  baseVelocity: PropTypes.number.isRequired,
+};
 
 const Home = () => {
   const handleClick = () => {
     console.log("Button clicked!");
   };
 
-  const transitions = useTransition(textItems, {
-    from: { opacity: 0, transform: "translateY(100vh)" },
-    enter: { opacity: 1, transform: "translateY(0px)" },
-    config: config.slow,
-    trail: 300,
-  });
+  // const transitions = useTransition(textItems, {
+  //   from: { opacity: 0, transform: "translateY(100vh)" },
+  //   enter: { opacity: 1, transform: "translateY(0px)" },
+  //   config: config.slow,
+  //   trail: 300,
+  // });
 
   return (
     <>
       <div className="container">
-        <div className="relative h-[calc(100vh_-_80px)] mb-40">
-          <div className="text-heading01 w-3/4 font-black py-10 md:text-display03 md:w-auto lg:text-display02">
-            {transitions((style, item) => (
-              <animated.h2 style={style}>{item}</animated.h2>
+        <div className="relative h-[calc(100dvh_-_80px)] mb-40 lg:h-[calc(100vh_-_80px)]">
+          <div className="text-heading01 w-3/4 font-black py-10 md:text-[80px] md:w-auto lg:text-display02">
+            {textItems.map((style) => (
+              <h2 key={style}>{style}</h2>
             ))}
           </div>
           <div className="mt-4">
@@ -49,57 +137,50 @@ const Home = () => {
             </Button>
           </div>
 
-          <MotionIcon className="absolute bottom-0 right-0" />
+          <MotionIcon className="absolute inset-x-0 bottom-0 justify-center md:inset-x-auto md:right-0 " />
         </div>
 
-        <div className="grid grid-cols-3 gap-6 mb-20">
-          <h3 className="heading03 font-bold black">我們的服務</h3>
-          <p className="col-span-2 heading01 font-bold">
+        <div className="grid grid-cols-1 gap-6 mb-12 lg:grid-cols-3 lg:mb-20">
+          <h3 className="text-heading06 font-bold black md:text-heading03">
+            我們的服務
+          </h3>
+          <p className="col-span-2 text-heading03 font-bold md:text-heading01">
             我們相信透過 AI 技術，
             <br />
             包括圖像識別、自然語言處理和機器翻譯等，讓您更快、更準確地做出決策。
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-6 mb-40">
-          <div className="border-[1px] border-solid border-black-800 rounded-2xl px-10 py-20">
-            <div className="w-20 h-20 mb-5">
-              <span className="material-symbols-outlined text-[80px]">
-                flash_on
-              </span>
-            </div>
-            <h4 className="heading03 font-black mb-5">快速</h4>
-            <p className="text-black-200">
-              我們先進的推理基礎設施提供了極短的響應時間，讓你的產品服務不間斷。
-            </p>
-          </div>
-          <div className="border-[1px] border-solid border-black-800 rounded-2xl px-10 py-20">
-            <div className="w-20 h-20 mb-5">
-              <span className="material-symbols-outlined text-[80px]">
-                auto_awesome
-              </span>
-            </div>
-            <h4 className="heading03 font-black mb-5">靈活</h4>
-            <p className="text-black-200">
-              我們的服務可以根據您的需求進行靈活調整，同時還可以滿足不同項目和預算的需求。
-            </p>
-          </div>
-          <div className="border-[1px] border-solid border-black-800 rounded-2xl px-10 py-20">
-            <div className="w-20 h-20 mb-5">
-              <span className="material-symbols-outlined text-[80px]">
-                library_add
-              </span>
-            </div>
-            <h4 className="heading03 font-black mb-5">擴充</h4>
-            <p className="text-black-200">
-              我們的服務支持多種擴充選項，可以滿足您的不斷增長的 AI 需求。
-            </p>
-          </div>
+        <div className="grid grid-cols-1 gap-3 mb-[120px] lg:grid-cols-3 lg:gap-6 lg:mb-40">
+          {goodpointCard.map(({ icon, title, context }, i) => (
+            <motion.div
+              key={icon}
+              className="border-[1px] border-solid border-black-800 rounded-2xl px-10 py-20"
+              initial={{ opacity: 0 }}
+              whileInView={{
+                opacity: 1,
+                transition: { duration: 3, delay: 0.5 * i },
+              }}
+              viewport={{ once: true }}
+            >
+              <div className="w-20 h-20 mb-5">
+                <span className="material-symbols-outlined text-[80px]">
+                  {icon}
+                </span>
+              </div>
+              <h4 className="text-heading03 font-black mb-5">{title}</h4>
+              <p className="text-black-200">{context}</p>
+            </motion.div>
+          ))}
         </div>
 
-        <h3 className="heading03 font-black mb-20">來自合作夥伴</h3>
-        <div className="relative mb-40">
+        <h3 className="text-heading06 font-black mb-6 md:text-heading03 md:mb-20">
+          來自合作夥伴
+        </h3>
+        <div className="relative overflow-hidden mb-12 md:mb-40">
           <div className="absolute w-full h-full bg-black-gradient z-50"></div>
-          <div className="flex gap-5 overflow-hidden mb-5">
+          <ParallaxImg baseVelocity={-5}></ParallaxImg>
+          <ParallaxImg baseVelocity={5}></ParallaxImg>
+          {/* <div className="flex gap-5 overflow-hidden mb-3 md:mb-5">
             <img
               className="w-40 h-10 object-cover"
               src={enterprise1}
@@ -141,8 +222,8 @@ const Home = () => {
               alt="enterprise8"
             />
             {/* <img className="w-40 h-10 object-cover" src={enterprise9} alt="enterprise9" /> */}
-          </div>
-          <div className="flex gap-5 overflow-hidden">
+          {/* </div>  */}
+          {/* <div className="flex gap-5 overflow-hidden">
             <img
               className="w-40 h-10 object-cover"
               src={enterprise6}
@@ -183,9 +264,9 @@ const Home = () => {
               src={enterprise7}
               alt="enterprise2"
             />
-          </div>
+          </div> */}
         </div>
-        <div className="grid grid-cols-3 gap-6 mb-40">
+        <div className="grid grid-cols-1 gap-6 mb-[120px] lg:grid-cols-3 lg:mb-40">
           <div className="p-10 bg-black-0/[0.08] rounded-2xl flex flex-col gap-5">
             <div className="flex gap-[5px]">
               <span className="material-symbols-outlined text-base">star</span>
@@ -258,9 +339,11 @@ const Home = () => {
       <ProductSection />
 
       <div className="container">
-        <div className="flex flex-col items-center mb-20">
-          <div className="heading01 font-black text-center mb-20">
-            現在就來建立屬於你的服務吧
+        <div className="flex flex-col items-center py-[120px] px-12 mb-10 md:mb-20 md:py-auto">
+          <div className="text-heading03 font-black text-center mb-8 md:mb-10 md:text-heading01">
+            現在就來建立
+            <br className="md:hidden" />
+            屬於你的服務吧
           </div>
           <Button className="pl-10 pr-8" onClick={handleClick}>
             開始使用

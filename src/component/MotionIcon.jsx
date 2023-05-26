@@ -57,9 +57,9 @@ const MotionIcon = ({ className }) => {
       {imageAnimations.map((animation, index) => (
         <motion.img
           key={index}
-          className=""
+          className="w-[117px] h-[117px] md:w-[180px] md:h-[180px]"
           src={deco}
-          alt=""
+          alt="deco"
           initial={{ y: "100%" }}
           animate={animation}
         />
