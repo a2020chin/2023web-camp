@@ -28,6 +28,9 @@ export default {
       'heading04': ['28px', {lineHeight: '1.2'}],
       'heading05': ['24px', {lineHeight: '1.2'}],
       'heading06': ['20px', {lineHeight: '1.2'}],
+      'base' : ['16px', {lineHeight: '1.5'}],
+      'sm' : ['14px', {lineHeight: '1.5'}],
+      'tiny' : ['12px', {lineHeight: '1.5'}], 
     },
     extend: {
       colors: {

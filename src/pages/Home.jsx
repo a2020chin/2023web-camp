@@ -28,12 +28,9 @@ import {
   useAnimationFrame,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { PropTypes } from "prop-types";
 import { Link } from "react-router-dom";
-
-// import { useTransition, animated, config } from "@react-spring/web";
-// import { motion } from "framer-motion";
 
 const textItems = ["透過", "AI 工具王的", "強大模型", "讓您的業務更聰明"];
 const goodpointCard = [
@@ -135,22 +132,6 @@ function ParallaxImg({ baseVelocity = 100, imgArr, className }) {
           alt={item}
         />
       ))}
-      {/* {imgArr.map((item) => (
-        <img
-          key={`imgArr2-${item}`}
-          className="w-40 h-10 object-cover"
-          src={item}
-          alt={item}
-        />
-      ))}
-      {imgArr.map((item) => (
-        <img
-          key={`imgArr3-${item}`}
-          className="w-40 h-10 object-cover"
-          src={item}
-          alt={item}
-        />
-      ))} */}
     </motion.div>
   );
 }
@@ -161,35 +142,27 @@ ParallaxImg.propTypes = {
   className: PropTypes.string,
 };
 
-const Button = ({ children, onClick, className }) => {
+const Button = ({ children, className }) => {
   return (
     <Link
       className={`inline-block border-[1px] rounded-2xl py-5 ${className}`}
-      onClick={onClick}
       to="/pricing"
     >
-      <p className="flex font-black text-xl leading-[1.2]">{children}</p>
+      <p className="flex font-black text-heading06 leading-[1.2]">{children}</p>
     </Link>
   );
 };
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
   className: PropTypes.string.isRequired,
 };
 
 const Home = () => {
-  const handleClick = () => {
-    console.log("Button clicked!");
-  };
-
-  // const transitions = useTransition(textItems, {
-  //   from: { opacity: 0, transform: "translateY(100vh)" },
-  //   enter: { opacity: 1, transform: "translateY(0px)" },
-  //   config: config.slow,
-  //   trail: 300,
-  // });
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   return (
     <>
@@ -201,9 +174,7 @@ const Home = () => {
             ))}
           </div>
           <div className="mt-4">
-            <Button className="px-10" onClick={handleClick}>
-              開始使用
-            </Button>
+            <Button className="px-10">開始使用</Button>
           </div>
 
           <MotionIcon className="absolute inset-x-0 bottom-0 justify-center md:inset-x-auto md:right-0 " />
@@ -246,7 +217,7 @@ const Home = () => {
           來自合作夥伴
         </h3>
         <div className="relative overflow-hidden mb-12 md:mb-40">
-          <div className="absolute w-full h-full bg-black-gradient z-50"></div>
+          <div className="absolute w-full h-full bg-black-gradient z-10"></div>
           <ParallaxImg
             className="mb-3 md:mb-5"
             baseVelocity={-5}
@@ -324,7 +295,7 @@ const Home = () => {
         </div>
       </div>
 
-      <ProductSection />
+      <ProductSection className="mb-10 md:mb-20" />
 
       <div className="container">
         <div className="flex flex-col items-center py-[120px] px-12 mb-10 md:mb-20 md:py-auto">
@@ -333,7 +304,7 @@ const Home = () => {
             <br className="md:hidden" />
             屬於你的服務吧
           </div>
-          <Button className="pl-10 pr-8" onClick={handleClick}>
+          <Button className="pl-10 pr-8">
             開始使用
             <span className="ml-3 material-symbols-outlined">north_east</span>
           </Button>

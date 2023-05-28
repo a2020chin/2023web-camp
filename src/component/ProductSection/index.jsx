@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import queryString from "query-string";
+import PropTypes from "prop-types";
 
 import { FilterProductContext } from "../Context";
 
 import FilterProduct from "./FilterProduct";
 import ProductCard from "./ProductCard";
 
-const ProductSection = () => {
+const ProductSection = ({ className }) => {
   const [product, setProduct] = useState(null);
   const [aimodelValue, setAimodelValue] = useState([""]);
   const [aitypeValue, setAitypeValue] = useState([""]);
@@ -43,7 +44,9 @@ const ProductSection = () => {
         setToSort,
       }}
     >
-      <div className="bg-black-0 rounded-[20px] w-full py-20 mb-10 md:rounded-[80px] md:py-40 md:mb-20 lg:rounded-[160px]">
+      <div
+        className={`bg-black-0 rounded-[20px] w-full py-20 md:rounded-[80px] md:py-40 lg:rounded-[160px] ${className}`}
+      >
         <div className="container">
           <h2 className="text-heading03 text-black-1000 font-black text-center mb-8 md:text-display03 md:mb-20">
             這些超酷的應用，都來自 AI工具王
@@ -233,6 +236,10 @@ const ProductSection = () => {
       </div>
     </FilterProductContext.Provider>
   );
+};
+
+ProductSection.propTypes = {
+  className: PropTypes.string,
 };
 
 export default ProductSection;

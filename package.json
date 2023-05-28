@@ -15,7 +15,6 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@motionone/utils": "^10.15.1",
-    "@react-spring/web": "^9.7.2",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.16",
     "gh-pages": "^5.0.0",
