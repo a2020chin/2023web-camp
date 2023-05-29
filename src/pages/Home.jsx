@@ -219,7 +219,6 @@ const Home = () => {
               ))}
             </h2>
             <motion.div
-              className="mt-4"
               initial={{ y: "100vh" }}
               animate={
                 showHeader && {
@@ -371,7 +370,6 @@ const Home = () => {
                 opacity: 1,
                 x: [0, 20, -10, 10, -5, 0],
                 transition: {
-                  // type: "spring",
                   delay: 1,
                 },
               }}

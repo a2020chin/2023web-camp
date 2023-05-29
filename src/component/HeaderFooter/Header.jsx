@@ -1,10 +1,13 @@
 import Logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useCycle } from "framer-motion";
 import { useAnimeParameter } from "../Context";
+import { MenuToggle } from "./Menu/MenuToggle";
 
 const Header = () => {
   const { setShowHeader } = useAnimeParameter();
+  const [isOpen, toggleOpen] = useCycle(false, true);
+
   return (
     <AnimatePresence>
       <div className="container sticky top-0 backdrop-blur-md z-50">
@@ -25,6 +28,15 @@ const Header = () => {
             <Link to="/">首頁</Link>
             <Link to="/pricing">定價</Link>
           </div>
+          <motion.nav
+            className="flex items-center"
+            initial={false}
+            animate={isOpen ? "open" : "closed"}
+            // custom={height}
+            // ref={containerRef}
+          >
+            <MenuToggle toggle={() => toggleOpen()} />
+          </motion.nav>
         </motion.div>
       </div>
     </AnimatePresence>
