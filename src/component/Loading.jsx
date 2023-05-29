@@ -19,12 +19,12 @@ import { useEffect, useState } from "react";
 function Loading() {
   const [showModal, setShowModal] = useState(true);
   useEffect(() => {
-    setTimeout(() => setShowModal(false), 2000);
+    setTimeout(() => setShowModal(false), 3000);
   }, [setShowModal]);
   return (
     <AnimatePresence>
       {showModal && (
-        <div className="w-[100svw] h-[100svh] flex flex-col justify-center items-center">
+        <div className="w-[100svw] h-[100svh] flex flex-col justify-center items-center overflow-hidden">
           <motion.svg
             className="mb-10"
             xmlns="http://www.w3.org/2000/svg"
@@ -32,18 +32,25 @@ function Loading() {
             height="200"
             viewBox="0 0 200 200"
             fill="none"
-            animate={{ rotate: 360, opacity: 1 }}
-            transition={{
-              type: "spring",
-              mass: 5,
-              stiffness: 50,
-              damping: 30,
-              repeat: Infinity,
+            animate={{
+              rotate: 360,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                mass: 5,
+                stiffness: 50,
+                damping: 30,
+                repeat: Infinity,
+              },
             }}
             exit={{
               scale: 8,
               rotate: 720,
               opacity: 0,
+              transition: {
+                duration: 1.3,
+                delay: 0.2,
+              },
             }}
           >
             <path
@@ -60,27 +67,31 @@ function Loading() {
             />
           </motion.svg>
           <p className="text-heading01 tracking-widest">
-            {["L", "o", "a", "d", "i", "n", "g", ".", ".", "."].map(
-              (item, index) => (
-                <motion.span
-                  key={`loading-${item}`}
-                  className="inline-block"
-                  initial={{ y: 0 }}
-                  animate={{
-                    y: -20,
-                    transition: {
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      duration: 0.8,
-                      delay: index * 0.1,
-                    },
-                  }}
-                  exit={{ opacity: 0 }}
-                >
-                  {item}
-                </motion.span>
-              )
-            )}
+            {"Loading...".split("").map((item, index) => (
+              <motion.span
+                key={`loading-${item}-${index}`}
+                className="inline-block"
+                initial={{ y: 0 }}
+                animate={{
+                  y: -20,
+                  opacity: 1,
+                  transition: {
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    duration: 0.8,
+                    delay: index * 0.1,
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    duration: 0.2,
+                  },
+                }}
+              >
+                {item}
+              </motion.span>
+            ))}
           </p>
         </div>
       )}

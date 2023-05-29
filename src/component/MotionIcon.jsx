@@ -18,7 +18,7 @@ const MotionIcon = ({ className }) => {
             transition: {
               repeat: Infinity,
               duration: 3,
-              delay: index * 0.2,
+              delay: 2.6 + index * 0.2,
               ease: "easeInOut",
             },
           }}

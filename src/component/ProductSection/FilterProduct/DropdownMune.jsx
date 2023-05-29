@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useFilterProduct } from "../../Context";
 import { motion, AnimatePresence } from "framer-motion";
-// import { useTransition, animated, config } from "@react-spring/web";
 
 import DropdownOption from "./DropdownOption";
 
@@ -9,17 +8,6 @@ const DropdownMune = (prop) => {
   const [isOpen, setIsOpen] = useState(false);
   const { aimodelValue, aitypeValue, setAitypeValue, setAimodelValue } =
     useFilterProduct();
-
-  // const transitions = useTransition(isOpen, {
-  //   from: {
-  //     opacity: 0,
-  //     transform: `scale(${0.9})`,
-  //     transformOrigin: "top left",
-  //   },
-  //   enter: { opacity: 1, transform: `scale(${1})` },
-  //   leave: { opacity: 0, transform: `scale(${0.9})` },
-  //   config: config.wobbly,
-  // });
 
   const aimodelValueChange = (e) => {
     if (!aimodelValue.includes("") && aimodelValue.includes(e.target.value)) {

@@ -49,7 +49,7 @@ const ProductSection = ({ className }) => {
       >
         <div className="container">
           <h2 className="text-heading03 text-black-1000 font-black text-center mb-8 md:text-display03 md:mb-20">
-            這些超酷的應用，都來自 AI工具王
+            這些超酷的應用，都來自AI工具王
           </h2>
           <label className="relative block mb-6">
             <span className="sr-only">Search</span>
