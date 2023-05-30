@@ -21,7 +21,7 @@ export default {
     fontSize:{
       'display01': ['160px', {lineHeight: '1.2'}],
       'display02': ['120px', {lineHeight: '1.2'}],
-      'display03': ['60px', {lineHeight: '1.2'}],
+      'display03': ['80px', {lineHeight: '1.2'}],
       'heading01': ['48px', {lineHeight: '1.2'}],
       'heading02': ['40px', {lineHeight: '1.2'}],
       'heading03': ['32px', {lineHeight: '1.2'}],

@@ -1,26 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-// const loadingWordAnime = {
-//   base: {
-//     y: 0,
-//   },
-//   loading: {
-//     y: -10,
-//     transition: {
-//       repeat: Infinity,
-//       repeatType: "reverse",
-//       duration: 1,
-//       ease: "easeInOut",
-//     },
-//   },
-// };
-
-function Loading() {
+const Loading = () => {
   const [showModal, setShowModal] = useState(true);
   useEffect(() => {
     setTimeout(() => setShowModal(false), 3000);
+    return clearTimeout();
   }, [setShowModal]);
+
   return (
     <AnimatePresence>
       {showModal && (
@@ -97,6 +84,6 @@ function Loading() {
       )}
     </AnimatePresence>
   );
-}
+};
 
 export default Loading;

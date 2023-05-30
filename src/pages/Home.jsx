@@ -305,7 +305,7 @@ const Home = () => {
                   rotateY: 0,
                   opacity: 1,
                   transition: {
-                    duration: 1.5,
+                    duration: 0.8,
                     type: "tween",
                     delay: 1 + 0.3 * i,
                   },

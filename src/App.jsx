@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import HeaderFooter from "./component/HeaderFooter";
@@ -11,6 +11,7 @@ import { AnimeParameterContext } from "./component/Context";
 function App() {
   const [showModal, setShowModal] = useState(true);
   const [showHeader, setShowHeader] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => setShowModal(false), 5000);
@@ -22,7 +23,7 @@ function App() {
         setShowHeader,
       }}
     >
-      <Routes>
+      <Routes location={location}>
         <Route path="/" element={showModal ? <Loading /> : <HeaderFooter />}>
           <Route index element={<Home />} />
           <Route path="/pricing" element={<Pricing />} />

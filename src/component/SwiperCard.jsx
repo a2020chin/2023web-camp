@@ -14,7 +14,7 @@ const swiperInView = {
   whileInView: {
     opacity: 1,
     transition: {
-      delayChildren: 0.8,
+      delayChildren: 0.5,
       staggerChildren: 0.5,
     },
   },
@@ -32,6 +32,7 @@ const bounceInVariants = {
     transition: {
       type: "spring",
       damping: 14,
+      velocity: 3,
     },
   },
 };

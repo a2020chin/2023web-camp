@@ -2,6 +2,8 @@ import MotionIcon from "../component/MotionIcon";
 import ProductSection from "../component/ProductSection";
 
 import { useEffect } from "react";
+import { motion, MotionConfig } from "framer-motion";
+import { useAnimeParameter } from "../component/Context";
 
 const pricingCard = [
   {
@@ -68,100 +70,145 @@ const fqa = [
       "如果在使用過程中遇到問題,您可以聯聚客服或技術支持人員進行咨詢或報告問題。您也可以通過網站上的幫助中心或社區論壇尋找相關的解決方案和回答。",
   },
 ];
+const bannerVariants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+const bannerH2Variants = {
+  initial: {
+    opacity: 0,
+    x: -100,
+  },
+  animate: {
+    x: 0,
+    opacity: 1,
+  },
+};
 
 const Pricing = () => {
+  const { showHeader } = useAnimeParameter();
   useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }, []);
   return (
     <>
-      <div className="container">
-        <div className="relative h-[calc(100dvh_-_80px)] mb-[120px] lg:h-[calc(100vh_-_80px)] lg:mb-40">
-          <h2 className="text-heading01 font-black py-10 mb-20 md:text-[80px] md:w-auto lg:text-display02">
-            用多少，
-            <br />
-            付多少。
-          </h2>
-          <p className="text-heading04 font-black w-2/3 ml-auto lg:w-1/2 md:text-heading01">
-            我們相信，最靈活的取用機制，才能最大化的幫助你業務的推動。
-          </p>
-          <MotionIcon className="absolute inset-x-0 bottom-0 justify-center md:inset-x-auto md:left-0 " />
-        </div>
-        <div className="mb-[120px] md:mb-40">
-          <h3 className="text-heading06 font-bold mb-6 md:mb-20 md:text-heading03">
-            定價
-          </h3>
-          <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {pricingCard.map(({ author, goodpoint, price }, i) => (
-              <li
-                key={`pricingCard-${i}`}
-                className="flex flex-col h-60 pt-5 border border-black-800 rounded-2xl md:h-80"
-              >
-                <div className="flex-1 px-8 border-b border-black-800">
-                  <h4 className="text-heading03 font-black mb-3">{author}</h4>
-                  <ul className="list-disc list-inside">
-                    {goodpoint.map((item, index) => (
-                      <li key={`${author}-${item}-${index}`}>{item}</li>
-                    ))}
-                  </ul>
+      <MotionConfig viewport={{ once: true }}>
+        <div className="container">
+          <div className="relative h-[calc(100dvh_-_80px)] mb-[120px] lg:h-[calc(100vh_-_80px)] lg:mb-40">
+            <motion.h2
+              variants={bannerVariants}
+              initial="initial"
+              animate={showHeader && "animate"}
+              className="text-heading01 font-black py-10 mb-20 md:text-[80px] md:w-auto lg:text-display02"
+            >
+              <motion.span className="inline-block" variants={bannerH2Variants}>
+                用多少，
+              </motion.span>
+              <br />
+              <motion.span className="inline-block" variants={bannerH2Variants}>
+                付多少。
+              </motion.span>
+            </motion.h2>
+            <motion.p className="text-heading04 font-black w-2/3 ml-auto lg:w-1/2 md:text-heading01">
+              {"我們相信，最靈活的取用機制，才能最大化的幫助你業務的推動。"
+                .split("")
+                .map((item, index) => (
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={
+                      showHeader && {
+                        opacity: 1,
+                        transition: { delay: 0.8 + 0.05 * index },
+                      }
+                    }
+                    key={`banner-${index}`}
+                  >
+                    {item}
+                  </motion.span>
+                ))}
+            </motion.p>
+            <MotionIcon className="absolute inset-x-0 bottom-0 justify-center md:inset-x-auto md:left-0 " />
+          </div>
+          <div className="mb-[120px] md:mb-40">
+            <h3 className="text-heading06 font-bold mb-6 md:mb-20 md:text-heading03">
+              定價
+            </h3>
+            <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {pricingCard.map(({ author, goodpoint, price }, i) => (
+                <li
+                  key={`pricingCard-${i}`}
+                  className="flex flex-col h-60 pt-5 border border-black-800 rounded-2xl md:h-80"
+                >
+                  <div className="flex-1 px-8 border-b border-black-800">
+                    <h4 className="text-heading03 font-black mb-3">{author}</h4>
+                    <ul className="list-disc list-inside">
+                      {goodpoint.map((item, index) => (
+                        <li key={`${author}-${item}-${index}`}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="flex justify-between px-5 py-5 md:px-8">
+                    <p className="text-heading06 text-white font-black">
+                      NT${price}
+                      <span className="text-black-600 font-normal">
+                        ／1k tokens
+                      </span>
+                    </p>
+                    <button className="flex items-center font-bold">
+                      開始使用
+                      <span className="ml-3 font-normal text-base material-symbols-outlined">
+                        north_east
+                      </span>
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid grid-cols-1 gap-12 mb-[120px] lg:grid-cols-3 lg:mb-40 lg:gap-6">
+            <h3 className="text-heading06 font-bold md:text-heading03">
+              使用規範
+            </h3>
+            <div className="col-span-1 flex flex-col gap-y-6 md:col-span-2 md:gap-y-10">
+              {usageRules.map(({ title, content }) => (
+                <div key={title} className="border-b border-black-800">
+                  <h4 className="text-heading03 font-bold mb-6 lg:text-heading01">
+                    {title}
+                  </h4>
+                  <p className="text-base mb-10 lg:text-heading03">{content}</p>
                 </div>
-                <div className="flex justify-between px-5 py-5 md:px-8">
-                  <p className="text-heading06 text-white font-black">
-                    NT${price}
-                    <span className="text-black-600 font-normal">
-                      ／1k tokens
-                    </span>
-                  </p>
-                  <button className="flex items-center font-bold">
-                    開始使用
-                    <span className="ml-3 font-normal text-base material-symbols-outlined">
-                      north_east
-                    </span>
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="grid grid-cols-1 gap-12 mb-[120px] lg:grid-cols-3 lg:mb-40 lg:gap-6">
-          <h3 className="text-heading06 font-bold md:text-heading03">
-            使用規範
-          </h3>
-          <div className="col-span-1 flex flex-col gap-y-6 md:col-span-2 md:gap-y-10">
-            {usageRules.map(({ title, content }) => (
-              <div key={title} className="border-b border-black-800">
-                <h4 className="text-heading03 font-bold mb-6 lg:text-heading01">
-                  {title}
-                </h4>
-                <p className="text-base mb-10 lg:text-heading03">{content}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <ProductSection className="mb-[120px] md:mb-40" />
-      <div className="container">
-        <div className="grid grid-cols-1 gap-6 mb-12 lg:grid-cols-3 lg:mb-40">
-          <h3 className="text-heading06 font-bold md:text-heading03">
-            常見問題
-          </h3>
-          <ul className="col-span-1 flex flex-col gap-y-4 lg:col-span-2 ">
-            {fqa.map(({ question, answer }) => (
-              <li
-                key={question}
-                className="p-5 border border-black-800 rounded-2xl md:px-10"
-              >
-                <h4 className="flex items-center text-heading06 font-bold">
-                  <span className="mr-5 material-symbols-outlined">add</span>
-                  {question}
-                </h4>
-                <p className="mt-5 ml-11">{answer}</p>
-              </li>
-            ))}
-          </ul>
+        <ProductSection className="mb-[120px] md:mb-40" />
+        <div className="container">
+          <div className="grid grid-cols-1 gap-6 mb-12 lg:grid-cols-3 lg:mb-40">
+            <h3 className="text-heading06 font-bold md:text-heading03">
+              常見問題
+            </h3>
+            <ul className="col-span-1 flex flex-col gap-y-4 lg:col-span-2 ">
+              {fqa.map(({ question, answer }) => (
+                <li
+                  key={question}
+                  className="p-5 border border-black-800 rounded-2xl md:px-10"
+                >
+                  <h4 className="flex items-center text-heading06 font-bold">
+                    <span className="mr-5 material-symbols-outlined">add</span>
+                    {question}
+                  </h4>
+                  <p className="mt-5 ml-11">{answer}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      </MotionConfig>
     </>
   );
 };
