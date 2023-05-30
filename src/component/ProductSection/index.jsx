@@ -10,6 +10,7 @@ import ProductCard from "./ProductCard";
 
 const ProductSection = ({ className }) => {
   const [product, setProduct] = useState(null);
+  const [pagination, setPagination] = useState(null);
   const [aimodelValue, setAimodelValue] = useState([""]);
   const [aitypeValue, setAitypeValue] = useState([""]);
   const [toSort, setToSort] = useState(0);
@@ -24,7 +25,9 @@ const ProductSection = ({ className }) => {
         const url = `https://2023-engineer-camp.zeabur.app/api/v1/works/?${query}`;
         const response = await axios.get(url);
         setProduct(response.data?.ai_works?.data);
+        setPagination(response.data?.ai_works?.page);
         console.log(response);
+        console.log(response.data?.ai_works.page);
       } catch (error) {
         console.error(error);
       }
@@ -97,21 +100,13 @@ const ProductSection = ({ className }) => {
               )}
           </ul>
 
-          {/* <nav className="flex justify-end">
+          <nav className="flex justify-end">
             <ul className="flex items-center gap-x-1">
               <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="-1"
-                  id="back"
-                />
-                <label
-                  htmlFor="back"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
+                <button
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                  type="button"
                 >
-                  <span className="sr-only">Previous</span>
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5"
@@ -125,96 +120,31 @@ const ProductSection = ({ className }) => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </label>
+                </button>
               </li>
+              {Array.from(
+                new Array(pagination.total_pages),
+                (_, index) => index + 1
+              ).map((item) => (
+                <li key={`pagination-${item}`}>
+                  <button
+                    className={`flex w-12 h-12 duration-300 items-center justify-center rounded-2xl hover:bg-black-1000 hover:text-white ${
+                      pagination.current_page === item
+                        ? "bg-black-1000 text-white"
+                        : "text-black-1000"
+                    }`}
+                    type="button"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
               <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="1"
-                  id="pagination1"
-                />
-                <label
-                  htmlFor="pagination1"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
+                <button
+                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white disabled:cursor-wait"
+                  // disabled={pagination.has_pre === false}
+                  type="button"
                 >
-                  1
-                </label>
-              </li>
-              <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="2"
-                  id="pagination2"
-                />
-                <label
-                  htmlFor="pagination2"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
-                >
-                  2
-                </label>
-              </li>
-              <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="3"
-                  id="pagination3"
-                />
-                <label
-                  htmlFor="pagination3"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
-                >
-                  3
-                </label>
-              </li>
-              <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="4"
-                  id="pagination4"
-                />
-                <label
-                  htmlFor="pagination4"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
-                >
-                  4
-                </label>
-              </li>
-              <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="5"
-                  id="pagination5"
-                />
-                <label
-                  htmlFor="pagination5"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
-                >
-                  5
-                </label>
-              </li>
-              <li>
-                <input
-                  className="sr-only peer"
-                  type="radio"
-                  name="pagination"
-                  value="+1"
-                  id="next"
-                />
-                <label
-                  htmlFor="next"
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white peer-checked:bg-black-1000 peer-checked:text-white"
-                >
-                  <span className="sr-only">Next</span>
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5"
@@ -228,10 +158,10 @@ const ProductSection = ({ className }) => {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                </label>
+                </button>
               </li>
             </ul>
-          </nav> */}
+          </nav>
         </div>
       </div>
     </FilterProductContext.Provider>

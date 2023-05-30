@@ -1,8 +1,8 @@
 import MotionIcon from "../component/MotionIcon";
 import ProductSection from "../component/ProductSection";
 
-import { useEffect } from "react";
-import { motion, MotionConfig } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, MotionConfig, AnimatePresence } from "framer-motion";
 import { useAnimeParameter } from "../component/Context";
 
 const pricingCard = [
@@ -91,6 +91,7 @@ const bannerH2Variants = {
 
 const Pricing = () => {
   const { showHeader } = useAnimeParameter();
+  const [showFQA, setShowFQA] = useState(null);
   useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -194,15 +195,40 @@ const Pricing = () => {
             </h3>
             <ul className="col-span-1 flex flex-col gap-y-4 lg:col-span-2 ">
               {fqa.map(({ question, answer }) => (
-                <li
-                  key={question}
-                  className="p-5 border border-black-800 rounded-2xl md:px-10"
-                >
-                  <h4 className="flex items-center text-heading06 font-bold">
-                    <span className="mr-5 material-symbols-outlined">add</span>
-                    {question}
-                  </h4>
-                  <p className="mt-5 ml-11">{answer}</p>
+                <li key={question}>
+                  <motion.button
+                    className="p-5 border border-black-800 rounded-2xl md:px-10 w-full"
+                    onClick={() => {
+                      setShowFQA((pre) => (pre === question ? null : question));
+                    }}
+                  >
+                    <h4 className="flex items-center text-heading06 font-bold">
+                      <span className="mr-5 material-symbols-outlined">
+                        {showFQA === question ? "remove" : "add"}
+                      </span>
+                      {question}
+                    </h4>
+                    <AnimatePresence>
+                      {showFQA === question && (
+                        <motion.p
+                          initial={{
+                            opacity: 0,
+                            height: 0,
+                            margin: "0",
+                          }}
+                          animate={{
+                            opacity: 1,
+                            height: "auto",
+                            margin: "16px 0 0 44px",
+                          }}
+                          exit={{ opacity: 0, height: 0, margin: "0" }}
+                          className="text-start "
+                        >
+                          {answer}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
                 </li>
               ))}
             </ul>
