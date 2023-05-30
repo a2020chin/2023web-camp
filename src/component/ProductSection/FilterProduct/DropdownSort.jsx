@@ -14,7 +14,7 @@ const DropdownSort = () => {
   ];
 
   const sortValueChange = (e) => {
-    e.target.value === "0" ? setToSort(() => "0") : setToSort(() => "1");
+    e === "0" ? setToSort(() => "0") : setToSort(() => "1");
   };
 
   return (

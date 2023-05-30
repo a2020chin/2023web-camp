@@ -23,11 +23,14 @@ const Header = () => {
             }}
             onAnimationComplete={() => setShowHeader((value) => !value)}
           >
-            <img
-              src={Logo}
-              className="w-[147px] h-6 md:w-[245px] md:h-10"
-              alt="logo"
-            />
+            <h1>
+              <span className="sr-only">AI工具王</span>
+              <img
+                src={Logo}
+                className="w-[147px] h-6 md:w-[245px] md:h-10"
+                alt="logo"
+              />
+            </h1>
             <div className="hidden gap-5 md:flex">
               <Link to="/">首頁</Link>
               <Link to="/pricing">定價</Link>
