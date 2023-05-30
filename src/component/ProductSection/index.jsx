@@ -14,6 +14,12 @@ const ProductSection = ({ className }) => {
   const [aimodelValue, setAimodelValue] = useState([""]);
   const [aitypeValue, setAitypeValue] = useState([""]);
   const [toSort, setToSort] = useState(0);
+  const [pageValue, setPageValue] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,20 +27,20 @@ const ProductSection = ({ className }) => {
         const query = queryString.stringify({
           type: aitypeValue,
           sort: toSort,
+          search: searchValue,
+          page: pageValue,
         });
         const url = `https://2023-engineer-camp.zeabur.app/api/v1/works/?${query}`;
         const response = await axios.get(url);
         setProduct(response.data?.ai_works?.data);
         setPagination(response.data?.ai_works?.page);
-        console.log(response);
-        console.log(response.data?.ai_works.page);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, [aitypeValue, toSort]);
+  }, [aitypeValue, toSort, searchValue, pageValue]);
 
   return (
     <FilterProductContext.Provider
@@ -70,6 +76,8 @@ const ProductSection = ({ className }) => {
               placeholder="輸入關鍵字搜尋"
               type="text"
               name="search"
+              value={searchValue}
+              onChange={handleInputChange}
             />
           </label>
 
@@ -104,8 +112,14 @@ const ProductSection = ({ className }) => {
             <ul className="flex items-center gap-x-1">
               <li>
                 <button
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white"
+                  className={`flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl ${
+                    pagination?.has_pre == false
+                      ? "cursor-not-allowed text-black-400"
+                      : "text-black-1000 hover:bg-black-1000 hover:text-white"
+                  }`}
+                  disabled={pagination?.has_pre == false}
                   type="button"
+                  onClick={() => setPageValue((pre) => pre - 1)}
                 >
                   <svg
                     aria-hidden="true"
@@ -122,28 +136,38 @@ const ProductSection = ({ className }) => {
                   </svg>
                 </button>
               </li>
-              {Array.from(
-                new Array(pagination.total_pages),
-                (_, index) => index + 1
-              ).map((item) => (
-                <li key={`pagination-${item}`}>
-                  <button
-                    className={`flex w-12 h-12 duration-300 items-center justify-center rounded-2xl hover:bg-black-1000 hover:text-white ${
-                      pagination.current_page === item
-                        ? "bg-black-1000 text-white"
-                        : "text-black-1000"
-                    }`}
-                    type="button"
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
+              {pagination?.total_pages &&
+                Array(pagination?.total_pages)
+                  .fill()
+                  .map((val, index) => index + 1)
+                  .map((item) => (
+                    <li key={`pagination-${item}`}>
+                      <button
+                        className={`flex w-12 h-12 duration-300 items-center justify-center rounded-2xl hover:bg-black-1000 hover:text-white ${
+                          pagination?.current_page == item
+                            ? "bg-black-1000 text-white"
+                            : "text-black-1000"
+                        }`}
+                        disabled={pagination?.current_page == item}
+                        type="button"
+                        onClick={() => {
+                          setPageValue(Number(item));
+                        }}
+                      >
+                        {item}
+                      </button>
+                    </li>
+                  ))}
               <li>
                 <button
-                  className="flex w-12 h-12 duration-300 items-center justify-center text-black-1000 rounded-2xl hover:bg-black-1000 hover:text-white disabled:cursor-wait"
-                  // disabled={pagination.has_pre === false}
+                  className={`flex w-12 h-12 duration-300 items-center justify-center rounded-2xl  ${
+                    pagination?.has_next == false
+                      ? "cursor-not-allowed text-black-400"
+                      : "text-black-1000 hover:bg-black-1000 hover:text-white"
+                  }`}
+                  disabled={pagination?.has_next == false}
                   type="button"
+                  onClick={() => setPageValue((pre) => pre + 1)}
                 >
                   <svg
                     aria-hidden="true"

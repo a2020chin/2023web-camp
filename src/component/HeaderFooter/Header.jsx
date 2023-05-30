@@ -28,7 +28,7 @@ const Header = () => {
               className="w-[147px] h-6 md:w-[245px] md:h-10"
               alt="logo"
             />
-            <div className="hidden gap-5 lg:flex">
+            <div className="hidden gap-5 md:flex">
               <Link to="/">首頁</Link>
               <Link to="/pricing">定價</Link>
             </div>

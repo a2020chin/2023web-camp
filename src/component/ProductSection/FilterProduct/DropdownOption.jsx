@@ -4,20 +4,16 @@ import PropTypes from "prop-types";
 function DropdownOption({ options, onChange, data, checkIcon }) {
   return (
     <div>
-      {options.map(({ id, value, label, name }) => (
-        <li key={`checkbox-${id}`}>
-          <input
-            type="checkbox"
-            name={name}
-            value={value}
-            id={id}
-            checked={data.includes(value)}
-            onChange={onChange}
-            className="sr-only"
-          />
-          <label
-            className="pl-10 pr-8 py-2 flex justify-between items-center cursor-pointer hover:bg-black-200"
-            htmlFor={id}
+      {options.map(({ id, value, label }) => (
+        <li
+          className="pl-10 pr-8 py-2 cursor-pointer hover:bg-black-200"
+          key={`checkbox-${id}`}
+        >
+          <button
+            className="w-full flex justify-between items-center"
+            onClick={() => {
+              onChange(value);
+            }}
           >
             {label}
             {checkIcon && data.includes(value) && (
@@ -31,7 +27,7 @@ function DropdownOption({ options, onChange, data, checkIcon }) {
                 done
               </motion.span>
             )}
-          </label>
+          </button>
         </li>
       ))}
     </div>
