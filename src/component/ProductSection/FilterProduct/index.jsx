@@ -1,6 +1,7 @@
 import DropdownMune from "./DropdownMune";
 import AitypelSelectMune from "./AitypelSelectMune";
 import DropdownSort from "./DropdownSort";
+import Search from "./Search";
 
 const aimodelSelect = [
   { id: "aimodelall", value: "", label: "所有模型", name: "aimodel" },
@@ -22,14 +23,20 @@ const aitypeSelect = [
 
 const FilterProduct = () => {
   return (
-    <div className="flex justify-between flex-wrap items-center gap-y-4 mb-12 lg:mb-10">
-      <DropdownMune aimodelSelect={aimodelSelect} aitypeSelect={aitypeSelect} />
-      <AitypelSelectMune
-        className="order-3 lg:order-none"
-        aitypeSelect={aitypeSelect}
-      />
-      <DropdownSort />
-    </div>
+    <>
+      <Search />
+      <div className="flex justify-between flex-wrap items-center gap-y-4 mb-12 lg:mb-10">
+        <DropdownMune
+          aimodelSelect={aimodelSelect}
+          aitypeSelect={aitypeSelect}
+        />
+        <AitypelSelectMune
+          className="order-3 lg:order-none"
+          aitypeSelect={aitypeSelect}
+        />
+        <DropdownSort />
+      </div>
+    </>
   );
 };
 

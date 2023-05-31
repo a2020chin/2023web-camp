@@ -52,14 +52,12 @@ const DropdownMune = (prop) => {
         <p>{"篩選"}</p>
         <div
           className={`ml-3 w-5 h-5 flex justify-center items-center rounded-sm duration-300 ${
-            (aimodelValue.length > 0 || aitypeValue.length > 0) &&
             !(aimodelValue.includes("") && aitypeValue.includes("")) &&
             "bg-black-1000 text-white"
           }`}
         >
           <span
             className={`text-base material-symbols-outlined md:inline-block ${
-              (aimodelValue.length > 0 || aitypeValue.length > 0) &&
               !(aimodelValue.includes("") && aitypeValue.includes("")) &&
               "hidden"
             }`}
@@ -68,7 +66,6 @@ const DropdownMune = (prop) => {
           </span>
           <span
             className={`text-tiny md:hidden ${
-              (aimodelValue.length > 0 || aitypeValue.length > 0) &&
               !(aimodelValue.includes("") && aitypeValue.includes(""))
                 ? "inline-block"
                 : "hidden"

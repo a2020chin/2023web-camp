@@ -5,12 +5,9 @@ function DropdownOption({ options, onChange, data, checkIcon }) {
   return (
     <div>
       {options.map(({ id, value, label }) => (
-        <li
-          className="pl-10 pr-8 py-2 cursor-pointer hover:bg-black-200"
-          key={`checkbox-${id}`}
-        >
+        <li className="hover:bg-black-200" key={`checkbox-${id}`}>
           <button
-            className="w-full flex justify-between items-center"
+            className="w-full pl-10 pr-8 py-2 flex justify-between items-center"
             onClick={() => {
               onChange(value);
             }}

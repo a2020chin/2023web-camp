@@ -11,8 +11,8 @@ import Loading from "../Loading";
 const HeaderFooter = () => {
   const [product, setProduct] = useState(null);
   const [pagination, setPagination] = useState(null);
-  const [aimodelValue, setAimodelValue] = useState([]);
-  const [aitypeValue, setAitypeValue] = useState([]);
+  const [aimodelValue, setAimodelValue] = useState([""]);
+  const [aitypeValue, setAitypeValue] = useState([""]);
   const [toSort, setToSort] = useState(0);
   const [pageValue, setPageValue] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -32,8 +32,9 @@ const HeaderFooter = () => {
         const response = await axios.get(url);
         setProduct(response.data?.ai_works?.data);
         setPagination(response.data?.ai_works?.page);
+        console.log(toSort);
 
-        if (aitypeValue.length == 0 && toSort == 0 && searchValue == "") {
+        if (isLoading == 0) {
           setIsLoading(1);
         }
       } catch (error) {

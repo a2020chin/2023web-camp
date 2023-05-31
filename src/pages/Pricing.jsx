@@ -181,7 +181,7 @@ const Pricing = () => {
                 <motion.li
                   variants={pricingCardLiVariants}
                   key={`pricingCard-${i}`}
-                  className="flex flex-col h-60 pt-5 border border-black-800 rounded-2xl md:h-80"
+                  className="flex flex-col h-60 pt-5 border border-black-800 rounded-2xl duration-300 hover:border-white md:h-80"
                   layout
                 >
                   <div className="flex-1 px-8 border-b border-black-800">

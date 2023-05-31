@@ -1,42 +1,87 @@
-import PropTypes from "prop-types";
+import { motion, AnimatePresence } from "framer-motion";
+import { useFilterProduct } from "../Context";
+import { useState } from "react";
 
-const ProductCard = ({ img, title, content, model, author, type }) => {
+const ProductCard = () => {
+  const [isImageLoading, setImageLoading] = useState(false);
+
+  const { product } = useFilterProduct();
+
+  const handleImageLoad = (imageId) => {
+    setImageLoading((prev) => ({
+      ...prev,
+      [imageId]: true,
+    }));
+  };
+
   return (
-    <li className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000">
-      <div className="overflow-hidden">
-        <img
-          className="w-full object-cover duration-500 group-hover:scale-150"
-          src={img}
-          alt={title}
-        />
-      </div>
-      <div className="flex-1 px-8 py-5 border-b-[1px] border-solid border-black-200">
-        <h3 className="font-black text-heading06 mb-3">{title}</h3>
-        <p className="text-sm leading-[21px] text-black-800">{content}</p>
-      </div>
-      <div className="flex justify-between items-center px-8 py-5 border-b-[1px] border-solid border-black-200">
-        <p className="font-bold">{model}</p>
-        <p>{author}</p>
-      </div>
-      <div className="flex justify-between items-center px-8 py-5">
-        <p>{type}</p>
-        <a href="#" className="w-[18px] h-[18px]">
-          <span className="text-[18px] font-bold material-symbols-outlined">
-            share
-          </span>
-        </a>
-      </div>
-    </li>
+    <>
+      <ul className="grid grid-cols-1 mb-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatePresence>
+          {product &&
+            product.map(
+              (
+                { description, discordId, id, imageUrl, model, title, type },
+                index
+              ) => (
+                <motion.li
+                  key={id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3, delay: 0.2 * index }}
+                  className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000"
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      className={`w-full object-cover duration-500 group-hover:scale-150 ${
+                        isImageLoading[id] ? "block" : "hidden"
+                      }`}
+                      src={imageUrl}
+                      alt={title}
+                      onLoad={() => handleImageLoad(id)}
+                    />
+                    <div
+                      className={`h-44 items-center justify-center mb-4 bg-gray-300 ${
+                        isImageLoading[id] ? "hidden" : "flex"
+                      }`}
+                    >
+                      <svg
+                        className="w-12 h-12 text-gray-200"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 640 512"
+                      >
+                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1 px-8 py-5 border-b-[1px] border-solid border-black-200">
+                    <h3 className="font-black text-heading06 mb-3">{title}</h3>
+                    <p className="text-sm leading-[21px] text-black-800">
+                      {description}
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center px-8 py-5 border-b-[1px] border-solid border-black-200">
+                    <p className="font-bold">{model}</p>
+                    <p>{discordId}</p>
+                  </div>
+                  <div className="flex justify-between items-center px-8 py-5">
+                    <p>{type}</p>
+                    <a href="#" className="w-[18px] h-[18px]">
+                      <span className="text-[18px] font-bold material-symbols-outlined">
+                        share
+                      </span>
+                    </a>
+                  </div>
+                </motion.li>
+              )
+            )}
+        </AnimatePresence>
+      </ul>
+    </>
   );
-};
-
-ProductCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default ProductCard;
