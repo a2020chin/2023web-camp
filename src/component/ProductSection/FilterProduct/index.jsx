@@ -13,12 +13,12 @@ const aimodelSelect = [
 
 const aitypeSelect = [
   { id: "aitypeall", value: "", label: "全部", name: "aitype" },
-  { id: "aitype1", value: "聊天", label: "聊天", name: "aitype" },
-  { id: "aitype2", value: "影像辨識", label: "影像辨識", name: "aitype" },
-  { id: "aitype3", value: "翻譯", label: "翻譯", name: "aitype" },
-  { id: "aitype4", value: "行銷", label: "行銷", name: "aitype" },
-  { id: "aitype5", value: "客服", label: "客服", name: "aitype" },
-  { id: "aitype6", value: "生產力", label: "生產力", name: "aitype" },
+  { id: "aitype1", value: "問答服務", label: "問答服務", name: "aitype" },
+  { id: "aitype2", value: "虛擬客服", label: "虛擬客服", name: "aitype" },
+  { id: "aitype3", value: "生活應用", label: "生活應用", name: "aitype" },
+  { id: "aitype4", value: "程式知識", label: "程式知識", name: "aitype" },
+  { id: "aitype5", value: "翻譯助手", label: "翻譯助手", name: "aitype" },
+  { id: "aitype6", value: "行銷文案", label: "行銷文案", name: "aitype" },
 ];
 
 const FilterProduct = () => {

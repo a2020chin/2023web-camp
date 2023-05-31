@@ -21,7 +21,16 @@ const ProductCard = () => {
           {product &&
             product.map(
               (
-                { description, discordId, id, imageUrl, model, title, type },
+                {
+                  description,
+                  discordId,
+                  id,
+                  link,
+                  imageUrl,
+                  model,
+                  title,
+                  type,
+                },
                 index
               ) => (
                 <motion.li
@@ -30,7 +39,7 @@ const ProductCard = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3, delay: 0.2 * index }}
-                  className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden cursor-pointer text-black-1000"
+                  className="group flex flex-col rounded-2xl border-[1px] border-solid border-black-200 overflow-hidden text-black-1000"
                 >
                   <div className="overflow-hidden">
                     <img
@@ -69,7 +78,7 @@ const ProductCard = () => {
                   </div>
                   <div className="flex justify-between items-center px-8 py-5">
                     <p>{type}</p>
-                    <a href="#" className="w-[18px] h-[18px]">
+                    <a href={link} className="w-[18px] h-[18px]">
                       <span className="text-[18px] font-bold material-symbols-outlined">
                         share
                       </span>
