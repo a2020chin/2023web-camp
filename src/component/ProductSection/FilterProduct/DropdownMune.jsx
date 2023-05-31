@@ -49,12 +49,38 @@ const DropdownMune = (prop) => {
           isOpen ? "border-black-1000" : ""
         }`}
       >
-        <p className="flex">
-          篩選
-          <span className="ml-3 text-base material-symbols-outlined">
-            filter_alt
+        <p>{"篩選"}</p>
+        <div
+          className={`ml-3 w-5 h-5 flex justify-center items-center rounded-sm duration-300 ${
+            (aimodelValue.length > 0 || aitypeValue.length > 0) &&
+            !(aimodelValue.includes("") && aitypeValue.includes("")) &&
+            "bg-black-1000 text-white"
+          }`}
+        >
+          <span
+            className={`text-base material-symbols-outlined md:inline-block ${
+              (aimodelValue.length > 0 || aitypeValue.length > 0) &&
+              !(aimodelValue.includes("") && aitypeValue.includes("")) &&
+              "hidden"
+            }`}
+          >
+            {"filter_alt"}
           </span>
-        </p>
+          <span
+            className={`text-tiny md:hidden ${
+              (aimodelValue.length > 0 || aitypeValue.length > 0) &&
+              !(aimodelValue.includes("") && aitypeValue.includes(""))
+                ? "inline-block"
+                : "hidden"
+            }`}
+          >
+            {aimodelValue.includes("")
+              ? 0 + aitypeValue.length
+              : aitypeValue.includes("")
+              ? 0 + aimodelValue.length
+              : aimodelValue.length + aitypeValue.length}
+          </span>
+        </div>
       </button>
       <AnimatePresence>
         {isOpen && (
