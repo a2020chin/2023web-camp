@@ -1,16 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-const Loading = () => {
-  const [showModal, setShowModal] = useState(true);
-  useEffect(() => {
-    setTimeout(() => setShowModal(false), 3000);
-    return clearTimeout();
-  }, [setShowModal]);
-
+const Loading = ({ isLoading, setIsLoading }) => {
   return (
-    <AnimatePresence>
-      {showModal && (
+    <AnimatePresence onExitComplete={() => setIsLoading(2)}>
+      {isLoading == 0 && (
         <div className="w-[100svw] h-[100svh] flex flex-col justify-center items-center overflow-hidden">
           <motion.svg
             className="mb-10"
@@ -84,6 +78,11 @@ const Loading = () => {
       )}
     </AnimatePresence>
   );
+};
+
+Loading.propTypes = {
+  isLoading: PropTypes.number.isRequired,
+  setIsLoading: PropTypes.func.isRequired,
 };
 
 export default Loading;

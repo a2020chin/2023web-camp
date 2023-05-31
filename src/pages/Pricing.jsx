@@ -3,7 +3,7 @@ import ProductSection from "../component/ProductSection";
 
 import { useEffect, useState } from "react";
 import { motion, MotionConfig, AnimatePresence } from "framer-motion";
-import { useAnimeParameter } from "../component/Context";
+import { useFilterProduct } from "../component/Context";
 
 const pricingCard = [
   {
@@ -122,7 +122,7 @@ const usageRulesVariants = {
 };
 
 const Pricing = () => {
-  const { showHeader } = useAnimeParameter();
+  const { showHeader } = useFilterProduct();
   const [showFQA, setShowFQA] = useState(null);
   useEffect(() => {
     document.body.scrollTop = 0;

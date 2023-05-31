@@ -2,7 +2,7 @@
 import MotionIcon from "../component/MotionIcon";
 import ProductSection from "../component/ProductSection";
 import SwiperCard from "../component/SwiperCard";
-import { useAnimeParameter } from "../component/Context";
+import { useFilterProduct } from "../component/Context";
 
 import enterprise1 from "../assets/enterprise1.png";
 import enterprise2 from "../assets/enterprise2.png";
@@ -185,7 +185,7 @@ Button.propTypes = {
 };
 
 const Home = () => {
-  const { showHeader } = useAnimeParameter();
+  const { showHeader } = useFilterProduct();
 
   useEffect(() => {
     document.body.scrollTop = 0;

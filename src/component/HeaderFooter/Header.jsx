@@ -1,11 +1,11 @@
 import Logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAnimeParameter } from "../Context";
+import { useFilterProduct } from "../Context";
 import Menu from "./Menu";
 
 const Header = () => {
-  const { setShowHeader } = useAnimeParameter();
+  const { setShowHeader } = useFilterProduct();
 
   return (
     <AnimatePresence>
