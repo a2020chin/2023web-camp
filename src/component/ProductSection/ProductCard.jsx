@@ -78,7 +78,7 @@ const ProductCard = () => {
                   </div>
                   <div className="flex justify-between items-center px-8 py-5">
                     <p>{type}</p>
-                    <a href={link} className="w-[18px] h-[18px]">
+                    <a href={link} target="_" className="w-[18px] h-[18px]">
                       <span className="text-[18px] font-bold material-symbols-outlined">
                         share
                       </span>
