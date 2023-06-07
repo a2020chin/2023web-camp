@@ -44,7 +44,7 @@ const Footer = () => {
             </li>
           </ul>
         </nav>
-        <button className="flex" onClick={toTop}>
+        <button type="button" className="flex" onClick={toTop}>
           Back to top
           <span className="ml-3 text-base material-symbols-outlined">
             arrow_upward

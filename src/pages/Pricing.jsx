@@ -199,7 +199,10 @@ const Pricing = () => {
                         ／1k tokens
                       </span>
                     </p>
-                    <button className="flex items-center font-bold">
+                    <button
+                      type="button"
+                      className="flex items-center font-bold"
+                    >
                       開始使用
                       <span className="ml-3 font-normal text-base material-symbols-outlined">
                         north_east
@@ -250,6 +253,7 @@ const Pricing = () => {
               {fqa.map(({ question, answer }) => (
                 <li key={question}>
                   <motion.button
+                    type="button"
                     className="p-5 border border-black-800 rounded-2xl md:px-10 w-full"
                     onClick={() => {
                       setShowFQA((pre) => (pre === question ? null : question));

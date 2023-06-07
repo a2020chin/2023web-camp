@@ -24,17 +24,23 @@ const Header = () => {
             onAnimationComplete={() => setShowHeader((value) => !value)}
           >
             <h1>
-              <span className="sr-only">AI工具王</span>
-              <img
-                src={Logo}
-                className="w-[147px] h-6 md:w-[245px] md:h-10"
-                alt="logo"
-              />
+              <Link to="/">
+                <span className="sr-only">AI工具王</span>
+                <img
+                  src={Logo}
+                  className="w-[147px] h-6 md:w-[245px] md:h-10"
+                  alt="logo"
+                />
+              </Link>
             </h1>
-            <div className="hidden gap-5 md:flex">
-              <Link to="/">首頁</Link>
-              <Link to="/pricing">定價</Link>
-            </div>
+            <ul className="hidden gap-5 md:flex">
+              <li>
+                <Link to="/">首頁</Link>
+              </li>
+              <li>
+                <Link to="/pricing">定價</Link>
+              </li>
+            </ul>
             <Menu />
           </motion.div>
         </div>
